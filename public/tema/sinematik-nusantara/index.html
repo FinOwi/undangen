@@ -171,6 +171,22 @@ footer b{color:var(--gold);letter-spacing:.2em}
 #nav a{font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--ink-dim);padding:9px 13px;border-radius:999px}
 #nav a.on{color:var(--gold);background:rgba(212,162,78,.12)}
 
+/* ---------- ambient: napas Karo di seluruh isi ---------- */
+#ambient{position:fixed;inset:-8% 0;z-index:1;pointer-events:none;opacity:.5;overflow:hidden}
+#ambient img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.85)}
+#ambient .a-vil{mix-blend-mode:multiply;filter:brightness(.42) saturate(.85)}
+#ambient::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 50% 8%,transparent 26%,rgba(16,11,7,.72) 76%,var(--night) 100%)}
+
+/* ---------- scenebreak: jeda sinematik antar seksi ---------- */
+.scenebreak{position:relative;height:40vh;min-height:280px;overflow:hidden}
+.scenebreak img{position:absolute;left:0;top:-18%;width:100%;height:136%;object-fit:cover;will-change:transform}
+.scenebreak .b-mid{mix-blend-mode:multiply}
+.scenebreak::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,var(--night) 0%,transparent 24%,transparent 68%,var(--night) 100%)}
+.scenebreak .cap{position:absolute;left:0;right:0;bottom:12%;text-align:center;z-index:2;
+  font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink);text-shadow:0 2px 18px rgba(0,0,0,.6)}
+
 @media(min-width:700px){.couple{grid-template-columns:1fr auto 1fr;align-items:center}.amp{align-self:center;margin:0}}
 </style>
 </head>
@@ -178,6 +194,10 @@ footer b{color:var(--gold);letter-spacing:.2em}
 
 <canvas id="dust"></canvas>
 <div id="shift"></div>
+<div id="ambient" aria-hidden="true">
+  <img class="a-sky" src="/tema/sinematik-nusantara/assets/sky.webp" alt="">
+  <img class="a-vil" src="/tema/sinematik-nusantara/assets/village.webp" alt="">
+</div>
 <div class="demo-tag">DEMO</div>
 
 <!-- COVER GATE -->
@@ -211,6 +231,10 @@ footer b{color:var(--gold);letter-spacing:.2em}
   </section>
 
   <!-- MEMPELAI -->
+  <div class="scenebreak rv" aria-hidden="true">
+    <img class="b-sky" src="/tema/sinematik-nusantara/assets/sky.webp" alt="" loading="lazy">
+    <img class="b-mid" src="/tema/sinematik-nusantara/assets/mountains.webp" alt="" loading="lazy">
+  </div>
   <section id="mempelai">
     <div class="sec-head rv">
       <p class="eyebrow">Mempelai</p>
@@ -253,6 +277,10 @@ footer b{color:var(--gold);letter-spacing:.2em}
   </section>
 
   <!-- ACARA -->
+  <div class="scenebreak rv" aria-hidden="true">
+    <img class="b-sky" src="/tema/sinematik-nusantara/assets/sky.webp" alt="" loading="lazy">
+    <img class="b-mid" src="/tema/sinematik-nusantara/assets/village.webp" alt="" loading="lazy">
+  </div>
   <section id="acara">
     <div class="sec-head rv">
       <p class="eyebrow">Waktu & Tempat</p>
@@ -295,6 +323,9 @@ footer b{color:var(--gold);letter-spacing:.2em}
   </section>
 
   <!-- GALERI -->
+  <div class="scenebreak rv" aria-hidden="true">
+    <img src="/tema/sinematik-nusantara/assets/prewed-1.webp" alt="" loading="lazy">
+  </div>
   <section id="galeri">
     <div class="sec-head rv">
       <p class="eyebrow">Galeri</p>
@@ -333,6 +364,10 @@ footer b{color:var(--gold);letter-spacing:.2em}
   </section>
 
   <!-- RSVP -->
+  <div class="scenebreak rv" aria-hidden="true">
+    <img class="b-sky" src="/tema/sinematik-nusantara/assets/sky.webp" alt="" loading="lazy">
+    <img class="b-mid" src="/tema/sinematik-nusantara/assets/foliage.webp" alt="" loading="lazy">
+  </div>
   <section id="rsvp">
     <div class="sec-head rv">
       <p class="eyebrow">Konfirmasi</p>
@@ -418,16 +453,26 @@ footer b{color:var(--gold);letter-spacing:.2em}
 
   // parallax layers
   var layers = Array.prototype.slice.call(document.querySelectorAll('.layer'));
-  var scene = document.getElementById('scene');
+  var amb = document.getElementById('ambient');
+  var breaks = Array.prototype.slice.call(document.querySelectorAll('.scenebreak'));
   var ticking = false;
   function parallax(){
     ticking = false;
-    var y = window.scrollY;
+    var y = window.scrollY, vh = window.innerHeight;
     // cover scene parallax (first viewport)
-    var cp = Math.min(y / window.innerHeight, 1);
+    var cp = Math.min(y / vh, 1);
     layers.forEach(function(l){
       var d = parseFloat(l.dataset.depth);
       l.style.transform = 'translateY(' + (y * d * 1.6).toFixed(1) + 'px) scale(' + (1 + cp * 0.06 * d * 4).toFixed(3) + ')';
+    });
+    // ambient: napas pelan di belakang konten
+    if(amb) amb.style.transform = 'translateY(' + (y * 0.05).toFixed(1) + 'px)';
+    // scenebreak: kamera melayang
+    breaks.forEach(function(b){
+      var r = b.getBoundingClientRect();
+      var off = (r.top + r.height / 2 - vh / 2) * -0.14;
+      var imgs = b.querySelectorAll('img');
+      for(var i = 0; i < imgs.length; i++) imgs[i].style.transform = 'translateY(' + off.toFixed(1) + 'px)';
     });
     // light shift warms with scroll
     var max = document.body.scrollHeight - window.innerHeight;

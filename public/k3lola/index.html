@@ -154,9 +154,23 @@ textarea{resize:vertical;min-height:64px}
     </div>
 
     <div class="card">
-      <h2>Foto <span class="hint">— maks 30, foto pertama = cover</span></h2>
-      <input type="file" id="fPhotos" accept="image/*" multiple style="margin-top:6px">
-      <div id="thumbs"></div>
+      <h2>Foto <span class="hint">— isi per slot biar tidak ngasal (total maks 30)</span></h2>
+      <label>📷 Foto Sampul <span class="hint">— cover depan · portrait 9:16 · kosong = foto galeri pertama</span></label>
+      <input type="file" id="fCover" accept="image/*" style="margin-top:6px">
+      <div id="thCover"></div>
+      <label style="margin-top:10px">🤵 Foto Mempelai Pria <span class="hint">— profil mempelai 1 · portrait 4:5 · kosong = inisial</span></label>
+      <input type="file" id="fGroom" accept="image/*" style="margin-top:6px">
+      <div id="thGroom"></div>
+      <label style="margin-top:10px">👰 Foto Mempelai Wanita <span class="hint">— profil mempelai 2 · portrait 4:5 · kosong = inisial</span></label>
+      <input type="file" id="fBride" accept="image/*" style="margin-top:6px">
+      <div id="thBride"></div>
+      <label style="margin-top:10px">💑 Foto Cerita <span class="hint">— timeline Cerita Kami · maks 3</span></label>
+      <input type="file" id="fStory" accept="image/*" multiple style="margin-top:6px">
+      <div id="thStory"></div>
+      <label style="margin-top:10px">🖼️ Galeri <span class="hint">— grid Momen Bahagia Kami</span></label>
+      <input type="file" id="fGallery" accept="image/*" multiple style="margin-top:6px">
+      <div id="thGallery"></div>
+      <p class="hint" id="slotCount" style="margin-top:8px"></p>
     </div>
 
     <div class="card">
@@ -211,7 +225,10 @@ const BULAN = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus
 const LS_CFG = "simcha_panel_cfg", LS_OK = "simcha_panel_ok";
 
 const $ = id => document.getElementById(id);
-let THEMES = [], PHOTOS = []; // PHOTOS: [{file, url(obj), name}]
+let THEMES = [];
+// Slot foto berlabel: cover/groom/bride = 1 file; story = maks 3; gallery = sisa (total maks 30).
+// Tiap item: {file, url(obj), name}
+let SLOT = {cover:null, groom:null, bride:null, story:[], gallery:[]};
 
 /* ================= UTIL ================= */
 async function sha256hex(s){
@@ -338,25 +355,42 @@ $("fDt").addEventListener("change", ()=>{
 });
 $("fG2c").addEventListener("change", e=>{ $("g2wrap").style.display = e.target.checked? "":"none"; });
 
-/* ================= FOTO ================= */
-$("fPhotos").addEventListener("change", e=>{
-  for(const f of e.target.files){
-    if(PHOTOS.length>=30){ alert("Maksimal 30 foto."); break; }
-    if(!f.type.startsWith("image/")) continue;
-    const safe = f.name.toLowerCase().replace(/[^a-z0-9.\-]/g,"-").replace(/-+/g,"-");
-    PHOTOS.push({file:f, url:URL.createObjectURL(f), name:safe});
-  }
-  e.target.value=""; renderThumbs();
-});
-function renderThumbs(){
-  const w=$("thumbs"); w.innerHTML="";
-  PHOTOS.forEach((p,i)=>{
-    const d=document.createElement("div"); d.className="th"+(i===0?" first":"");
-    d.innerHTML=`<img src="${p.url}" alt=""><div class="n">${i===0?"cover":i+1}</div><button class="x" data-i="${i}">×</button>`;
-    w.appendChild(d);
-  });
-  w.querySelectorAll(".x").forEach(b=>b.onclick=()=>{ PHOTOS.splice(+b.dataset.i,1); renderThumbs(); });
+/* ================= FOTO (slot berlabel) ================= */
+function slotCount(){ return (SLOT.cover?1:0)+(SLOT.groom?1:0)+(SLOT.bride?1:0)+SLOT.story.length+SLOT.gallery.length; }
+function mkPhoto(f){
+  if(!f.type.startsWith("image/")) return null;
+  const safe = f.name.toLowerCase().replace(/[^a-z0-9.\-]/g,"-").replace(/-+/g,"-");
+  return {file:f, url:URL.createObjectURL(f), name:safe};
 }
+function thumbHTML(p, slot, idx){
+  return `<div class="th"><img src="${p.url}" alt=""><button class="x" data-slot="${slot}" data-i="${idx}">×</button></div>`;
+}
+function renderSlots(){
+  const map = {cover:"thCover", groom:"thGroom", bride:"thBride", story:"thStory", gallery:"thGallery"};
+  for(const k of Object.keys(map)){
+    const w=$(map[k]); const items = k==="cover"||k==="groom"||k==="bride" ? (SLOT[k]?[SLOT[k]]:[]) : SLOT[k];
+    w.innerHTML = items.map((p,i)=>thumbHTML(p,k,i)).join("");
+  }
+  document.querySelectorAll("[data-slot]").forEach(b=>b.onclick=()=>{
+    const s=b.dataset.slot, i=+b.dataset.i;
+    if(s==="cover"||s==="groom"||s==="bride") SLOT[s]=null; else SLOT[s].splice(i,1);
+    renderSlots();
+  });
+  $("slotCount").textContent = `${slotCount()}/30 foto terisi`;
+}
+function bindSlot(inputId, slot, max){
+  $(inputId).addEventListener("change", e=>{
+    for(const f of e.target.files){
+      const p = mkPhoto(f); if(!p) continue;
+      if(slotCount()>=30){ alert("Maksimal 30 foto total."); break; }
+      if(slot==="cover"||slot==="groom"||slot==="bride"){ SLOT[slot]=p; }
+      else { if(SLOT[slot].length>=max){ alert(`Maksimal ${max} foto untuk slot ini.`); break; } SLOT[slot].push(p); }
+    }
+    e.target.value=""; renderSlots();
+  });
+}
+bindSlot("fCover","cover",1); bindSlot("fGroom","groom",1); bindSlot("fBride","bride",1);
+bindSlot("fStory","story",3); bindSlot("fGallery","gallery",30);
 </script>
 <script>
 "use strict";
@@ -383,12 +417,14 @@ function validate(slug, order){
   if(!window._dates) errs.push("Tanggal & jam acara wajib diisi.");
   if(!order.venue) errs.push("Venue wajib diisi.");
   if(!order.gift1_bank||!order.gift1_num) errs.push("Rekening 1 wajib diisi.");
-  if(PHOTOS.length===0) errs.push("Minimal 1 foto.");
-  if(PHOTOS.length>30) errs.push("Maksimal 30 foto.");
+  if(slotCount()===0) errs.push("Minimal 1 foto.");
+  if(slotCount()>30) errs.push("Maksimal 30 foto.");
   return errs;
 }
-function renderOrder(tpl, tema, slug, order, urls){
+function renderOrder(tpl, tema, slug, order, ph){
   // d = dict(tema) lalu order menimpa — persis build-order.py
+  // ph = {cover, groom, bride, story[], gallery[]} (URL string)
+  const urls = ph.gallery || [];
   const d = Object.assign({}, tema);
   const c1=order.c1, c2=order.c2, c1full=order.c1full, c2full=order.c2full;
   Object.assign(d, {
@@ -402,8 +438,19 @@ function renderOrder(tpl, tema, slug, order, urls){
     GIFT1_BANK:order.gift1_bank, GIFT1_NUM:order.gift1_num,
     GIFT1_RAW:order.gift1_num.replace(/\D/g,""),
     GIFT1_AN:order.gift1_an||("a.n. "+c1full),
-    COVER_IMG: urls[0]||tema.COVER_IMG||""
+    COVER_IMG: ph.cover || urls[0] || tema.COVER_IMG || ""
   });
+  const photoBlock=(url, initial, alt)=>
+    url ? `<div class="pfoto"><img src="${url}" alt="${esc(alt)}" loading="lazy"></div>`
+        : `<div class="mono">${esc(initial)}</div>`;
+  Object.assign(d, {
+    C1_PHOTOBLOCK: photoBlock(ph.groom, (c1[0]||"").toUpperCase(), c1full),
+    C2_PHOTOBLOCK: photoBlock(ph.bride, (c2[0]||"").toUpperCase(), c2full)
+  });
+  for(let i=0;i<3;i++){
+    d[`STORY_PHOTO_${i+1}`] = (ph.story||[])[i]
+      ? `<div class="sph"><img src="${(ph.story||[])[i]}" alt="${esc("Cerita "+(i+1))}" loading="lazy"></div>` : "";
+  }
   if(order.gift2_bank) Object.assign(d,{
     GIFT2_BANK:order.gift2_bank, GIFT2_NUM:order.gift2_num,
     GIFT2_RAW:(order.gift2_num||"").replace(/\D/g,""),
@@ -434,10 +481,8 @@ function cldDeliveryUrl(secureUrl){
   return secureUrl.replace("/upload/", "/upload/"+CLD_TRANSFORM+"/");
 }
 async function uploadPhotos(cfg, slug){
-  const sorted=[...PHOTOS].sort((a,b)=>a.name<b.name?-1:1);
-  const urls=[];
-  for(let i=0;i<sorted.length;i++){
-    const p=sorted[i];
+  // Upload per slot, kembalikan {cover, groom, bride, story[], gallery[]} (URL Cloudinary).
+  async function up(p){
     const fd=new FormData();
     fd.append("file", p.file);
     fd.append("upload_preset", cfg.preset);
@@ -446,10 +491,22 @@ async function uploadPhotos(cfg, slug){
     if(!r.ok){ const t=await r.text(); throw new Error(`Upload gagal ${p.name}: HTTP ${r.status} ${t.slice(0,120)}`); }
     const j=await r.json();
     if(!j.secure_url) throw new Error(`Upload gagal ${p.name}: respons tak dikenal`);
-    urls.push(cldDeliveryUrl(j.secure_url));
-    log(`  ✓ ${i+1}/${sorted.length} ${p.name}`,"ok");
+    return cldDeliveryUrl(j.secure_url);
   }
-  return urls;
+  const all=[SLOT.cover,SLOT.groom,SLOT.bride,...SLOT.story,...SLOT.gallery].filter(Boolean)
+    .sort((a,b)=>a.name<b.name?-1:1);
+  const out={cover:"",groom:"",bride:"",story:[],gallery:[]};
+  const urlOf=new Map();
+  for(let i=0;i<all.length;i++){
+    const u=await up(all[i]); urlOf.set(all[i],u);
+    log(`  ✓ ${i+1}/${all.length} ${all[i].name}`,"ok");
+  }
+  if(SLOT.cover) out.cover=urlOf.get(SLOT.cover);
+  if(SLOT.groom) out.groom=urlOf.get(SLOT.groom);
+  if(SLOT.bride) out.bride=urlOf.get(SLOT.bride);
+  out.story=SLOT.story.map(p=>urlOf.get(p));
+  out.gallery=SLOT.gallery.map(p=>urlOf.get(p));
+  return out;
 }
 
 /* ================= PUBLISH ================= */
@@ -470,17 +527,19 @@ async function doPublish(preview){
     const tpl=await (await fetch("../engine/template.html")).text();
     if(!tpl.includes("@C1@")) throw new Error("template.html tidak valid");
 
-    let urls;
+    let ph; // {cover, groom, bride, story[], gallery[]}
     if(preview){
       log("2/4 Mode pratinjau — tanpa upload.","inf");
-      urls=[...PHOTOS].sort((a,b)=>a.name<b.name?-1:1).map(p=>p.url);
+      const objURL=p=>p?p.url:"";
+      ph={cover:objURL(SLOT.cover),groom:objURL(SLOT.groom),bride:objURL(SLOT.bride),
+          story:SLOT.story.map(objURL),gallery:SLOT.gallery.map(objURL)};
     }else{
-      log(`2/4 Upload ${PHOTOS.length} foto ke Cloudinary...`,"inf");
-      urls=await uploadPhotos(cfg,slug);
+      log(`2/4 Upload ${slotCount()} foto ke Cloudinary...`,"inf");
+      ph=await uploadPhotos(cfg,slug);
     }
 
     log("3/4 Render HTML...","inf");
-    const {html,leftover}=renderOrder(tpl,tema,slug,order,urls);
+    const {html,leftover}=renderOrder(tpl,tema,slug,order,ph);
     if(leftover.length) log("⚠ placeholder gantung: "+leftover.join(", "),"err");
     else log("  ✓ tidak ada placeholder gantung","ok");
 

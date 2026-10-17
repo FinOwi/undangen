@@ -69,20 +69,41 @@ def main():
     tema = next(t for t in themes if t['slug'] == order['tema'])
     tpl = open(os.path.join(ENGINE, 'template.html'), encoding='utf-8').read()
 
-    # --- foto ---
+    # --- foto: konvensi prefix nama file = slot ---
+    #   cover-* / groom-* / bride-* / story1-*..story3-* -> slot khusus; sisanya -> galeri
     fdir = os.path.join(odir, 'foto')
     files = sorted([f for f in os.listdir(fdir)
                     if f.lower().endswith(IMG_EXT)]) if os.path.isdir(fdir) else []
     want = order.get('galeri') or files
     if len(want) > 30:
         sys.exit('maks 30 foto, dapat %d' % len(want))
+    def slot_of(fn):
+        n = fn.lower()
+        if n.startswith('cover-'): return 'cover'
+        if n.startswith('groom-'): return 'groom'
+        if n.startswith('bride-'): return 'bride'
+        if re.match(r'story[123]-', n): return 'story'
+        return 'gallery'
+    slot = {'cover': '', 'groom': '', 'bride': '', 'story': [], 'gallery': []}
     if no_upload:
-        urls = ['foto/' + f for f in want]
+        for f in want:
+            s = slot_of(f); v = 'foto/' + f
+            if s == 'gallery': slot['gallery'].append(v)
+            elif s == 'story': slot['story'].append(v)
+            else: slot[s] = v
+        urls = slot['gallery']
     else:
         if not want:
             sys.exit('tidak ada foto di %s/' % fdir)
         print('upload %d foto...' % len(want))
-        urls = upload_foto(slug, fdir, want)
+        up = upload_foto(slug, fdir, want)
+        umap = dict(zip(want, up))
+        for f in want:
+            s = slot_of(f); v = umap[f]
+            if s == 'gallery': slot['gallery'].append(v)
+            elif s == 'story': slot['story'].append(v)
+            else: slot[s] = v
+        urls = slot['gallery']
 
     # --- data render: tema sebagai basis, order menimpa ---
     d = dict(tema)
@@ -103,7 +124,7 @@ def main():
         'GIFT1_BANK': order['gift1_bank'], 'GIFT1_NUM': order['gift1_num'],
         'GIFT1_RAW': re.sub(r'\D', '', order['gift1_num']),
         'GIFT1_AN': order.get('gift1_an') or ('a.n. ' + c1full),
-        'COVER_IMG': urls[0] if urls else tema.get('COVER_IMG', ''),
+        'COVER_IMG': slot['cover'] or (urls[0] if urls else tema.get('COVER_IMG', '')),
     })
     if order.get('gift2_bank'):
         d.update({
@@ -114,6 +135,18 @@ def main():
     if order.get('quote'):
         d['QUOTE'] = order['quote']
         d['QUOTE_SRC'] = order.get('quote_src', '')
+
+    def photoblock(url, initial, alt):
+        if url:
+            return '<div class="pfoto"><img src="%s" alt="%s" loading="lazy"></div>' % (url, alt)
+        return '<div class="mono">%s</div>' % initial
+    d['C1_PHOTOBLOCK'] = photoblock(slot['groom'], c1[:1].upper(), c1full)
+    d['C2_PHOTOBLOCK'] = photoblock(slot['bride'], c2[:1].upper(), c2full)
+    for i in range(3):
+        sp = slot['story'][i] if i < len(slot['story']) else ''
+        d['STORY_PHOTO_%d' % (i + 1)] = (
+            '<div class="sph"><img src="%s" alt="Cerita %d" loading="lazy"></div>' % (sp, i + 1)
+        ) if sp else ''
 
     items = []
     for i, u in enumerate(urls):

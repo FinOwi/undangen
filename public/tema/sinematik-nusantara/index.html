@@ -171,11 +171,21 @@ footer b{color:var(--gold);letter-spacing:.2em}
 #nav a{font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--ink-dim);padding:9px 13px;border-radius:999px}
 #nav a.on{color:var(--gold);background:rgba(212,162,78,.12)}
 
-/* ---------- ambient: napas Karo di seluruh isi ---------- */
-#ambient{position:fixed;inset:-8% 0;z-index:1;pointer-events:none;opacity:.5;overflow:hidden}
-#ambient img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.85)}
-#ambient .a-vil{mix-blend-mode:multiply;filter:brightness(.42) saturate(.85)}
-#ambient::after{content:"";position:absolute;inset:0;
+/* ---------- ambient: 4 bab — Sehari di Tanah Karo ---------- */
+#ambient{position:fixed;inset:-8% 0;z-index:1;pointer-events:none;overflow:hidden}
+.ch{position:absolute;inset:0;opacity:0;will-change:opacity}
+.ch img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kb 48s ease-in-out infinite alternate}
+.ch .m{mix-blend-mode:multiply}
+.ch[data-c="0.06"] img{filter:brightness(.5) saturate(.9)}
+.ch[data-c="0.06"] .m{filter:brightness(.42) saturate(.9)}
+.ch[data-c="0.36"] img{filter:brightness(.55) saturate(1.05)}
+.ch[data-c="0.36"] .m{filter:brightness(.5) saturate(1.05)}
+.ch[data-c="0.66"] img{filter:brightness(.5) saturate(1.1)}
+.ch[data-c="0.66"] .m{filter:brightness(.4) saturate(1.1)}
+.ch[data-c="0.94"] img{filter:brightness(.5) saturate(.95)}
+.ch[data-c="0.94"] .m{filter:brightness(.32) saturate(.95)}
+@keyframes kb{from{transform:scale(1) translateY(0)}to{transform:scale(1.09) translateY(-1.5%)}}
+#ambient::after{content:"";position:absolute;inset:0;z-index:2;
   background:radial-gradient(120% 90% at 50% 8%,transparent 26%,rgba(16,11,7,.72) 76%,var(--night) 100%)}
 
 /* ---------- scenebreak: jeda sinematik antar seksi ---------- */
@@ -195,8 +205,22 @@ footer b{color:var(--gold);letter-spacing:.2em}
 <canvas id="dust"></canvas>
 <div id="shift"></div>
 <div id="ambient" aria-hidden="true">
-  <img class="a-sky" src="/tema/sinematik-nusantara/assets/sky.webp" alt="">
-  <img class="a-vil" src="/tema/sinematik-nusantara/assets/village.webp" alt="">
+  <div class="ch" data-c="0.06">
+    <img class="s" src="/tema/sinematik-nusantara/assets/sky.webp" alt="" loading="lazy">
+    <img class="m" src="/tema/sinematik-nusantara/assets/village.webp" alt="" loading="lazy">
+  </div>
+  <div class="ch" data-c="0.36">
+    <img class="s" src="/tema/sinematik-nusantara/assets/sky-noon.webp" alt="" loading="lazy">
+    <img class="m" src="/tema/sinematik-nusantara/assets/village.webp" alt="" loading="lazy">
+  </div>
+  <div class="ch" data-c="0.66">
+    <img class="s" src="/tema/sinematik-nusantara/assets/sky-dusk.webp" alt="" loading="lazy">
+    <img class="m" src="/tema/sinematik-nusantara/assets/mountains.webp" alt="" loading="lazy">
+  </div>
+  <div class="ch" data-c="0.94">
+    <img class="s" src="/tema/sinematik-nusantara/assets/sky-night.webp" alt="" loading="lazy">
+    <img class="m" src="/tema/sinematik-nusantara/assets/mountains.webp" alt="" loading="lazy">
+  </div>
 </div>
 <div class="demo-tag">DEMO</div>
 
@@ -234,6 +258,7 @@ footer b{color:var(--gold);letter-spacing:.2em}
   <div class="scenebreak rv" aria-hidden="true">
     <img class="b-sky" src="/tema/sinematik-nusantara/assets/sky.webp" alt="" loading="lazy">
     <img class="b-mid" src="/tema/sinematik-nusantara/assets/mountains.webp" alt="" loading="lazy">
+    <div class="cap">Fajar yang dijanjikan</div>
   </div>
   <section id="mempelai">
     <div class="sec-head rv">
@@ -278,8 +303,8 @@ footer b{color:var(--gold);letter-spacing:.2em}
 
   <!-- ACARA -->
   <div class="scenebreak rv" aria-hidden="true">
-    <img class="b-sky" src="/tema/sinematik-nusantara/assets/sky.webp" alt="" loading="lazy">
-    <img class="b-mid" src="/tema/sinematik-nusantara/assets/village.webp" alt="" loading="lazy">
+    <img src="/tema/sinematik-nusantara/assets/lake-vista.webp" alt="" loading="lazy">
+    <div class="cap">Di tanah kelahiran</div>
   </div>
   <section id="acara">
     <div class="sec-head rv">
@@ -325,6 +350,7 @@ footer b{color:var(--gold);letter-spacing:.2em}
   <!-- GALERI -->
   <div class="scenebreak rv" aria-hidden="true">
     <img src="/tema/sinematik-nusantara/assets/prewed-1.webp" alt="" loading="lazy">
+    <div class="cap">Momen yang abadi</div>
   </div>
   <section id="galeri">
     <div class="sec-head rv">
@@ -365,8 +391,9 @@ footer b{color:var(--gold);letter-spacing:.2em}
 
   <!-- RSVP -->
   <div class="scenebreak rv" aria-hidden="true">
-    <img class="b-sky" src="/tema/sinematik-nusantara/assets/sky.webp" alt="" loading="lazy">
+    <img class="b-sky" src="/tema/sinematik-nusantara/assets/sky-dusk.webp" alt="" loading="lazy">
     <img class="b-mid" src="/tema/sinematik-nusantara/assets/foliage.webp" alt="" loading="lazy">
+    <div class="cap">Menuju senja yang hangat</div>
   </div>
   <section id="rsvp">
     <div class="sec-head rv">
@@ -454,6 +481,7 @@ footer b{color:var(--gold);letter-spacing:.2em}
   // parallax layers
   var layers = Array.prototype.slice.call(document.querySelectorAll('.layer'));
   var amb = document.getElementById('ambient');
+  var chs = Array.prototype.slice.call(document.querySelectorAll('#ambient .ch'));
   var breaks = Array.prototype.slice.call(document.querySelectorAll('.scenebreak'));
   var ticking = false;
   function parallax(){
@@ -465,7 +493,14 @@ footer b{color:var(--gold);letter-spacing:.2em}
       var d = parseFloat(l.dataset.depth);
       l.style.transform = 'translateY(' + (y * d * 1.6).toFixed(1) + 'px) scale(' + (1 + cp * 0.06 * d * 4).toFixed(3) + ')';
     });
-    // ambient: napas pelan di belakang konten
+    // ambient: crossfade 4 bab sesuai progres scroll
+    var max = document.body.scrollHeight - vh;
+    var p = max > 0 ? y / max : 0;
+    chs.forEach(function(c){
+      var cc = parseFloat(c.dataset.c);
+      var w = Math.max(0, 1 - Math.abs(p - cc) / 0.34);
+      c.style.opacity = (w * 0.6).toFixed(3);
+    });
     if(amb) amb.style.transform = 'translateY(' + (y * 0.05).toFixed(1) + 'px)';
     // scenebreak: kamera melayang
     breaks.forEach(function(b){
@@ -474,9 +509,8 @@ footer b{color:var(--gold);letter-spacing:.2em}
       var imgs = b.querySelectorAll('img');
       for(var i = 0; i < imgs.length; i++) imgs[i].style.transform = 'translateY(' + off.toFixed(1) + 'px)';
     });
-    // light shift warms with scroll
-    var max = document.body.scrollHeight - window.innerHeight;
-    document.getElementById('shift').style.opacity = Math.min(max > 0 ? y / max : 0, 1) * 0.85;
+    // light shift: pendalaman hangat (bab warna dipegang ambient)
+    document.getElementById('shift').style.opacity = Math.min(max > 0 ? y / max : 0, 1) * 0.45;
   }
   window.addEventListener('scroll', function(){
     if(!ticking){ ticking = true; requestAnimationFrame(parallax); }

@@ -136,6 +136,21 @@ def main():
         d['QUOTE'] = order['quote']
         d['QUOTE_SRC'] = order.get('quote_src', '')
 
+    vurl = order.get('video_url') or ''
+    if vurl:
+        m = re.search(r'(?:youtube\.com/(?:watch\?v=|embed/|shorts/)|youtu\.be/)([\w-]{6,})', vurl)
+        if m:
+            inner = ('<iframe src="https://www.youtube.com/embed/%s" title="Video" loading="lazy" '
+                     'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; '
+                     'picture-in-picture" allowfullscreen></iframe>' % m.group(1))
+        else:
+            inner = '<video src="%s" controls playsinline preload="metadata"></video>' % vurl
+        d['VIDEO_SECTION'] = ('<section id="video"><p class="eyebrow rv">Video</p>'
+                              '<h2 class="title rv">Cuplikan Bahagia</h2>'
+                              '<div class="vframe">%s</div></section>' % inner)
+    else:
+        d['VIDEO_SECTION'] = ''
+
     def photoblock(url, initial, alt):
         if url:
             return '<div class="pfoto"><img src="%s" alt="%s" loading="lazy"></div>' % (url, alt)

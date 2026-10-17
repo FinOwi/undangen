@@ -198,6 +198,21 @@ footer b{color:var(--gold);letter-spacing:.2em}
 .scenebreak .cap{position:absolute;left:0;right:0;bottom:12%;text-align:center;z-index:2;
   font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink);text-shadow:0 2px 18px rgba(0,0,0,.6)}
 
+/* music button */
+#musicBtn{position:fixed;right:16px;bottom:88px;z-index:90;width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--gold);background:rgba(20,14,8,.82);color:var(--gold);font-size:19px;cursor:pointer;
+  display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:opacity .3s}
+#musicBtn.show{display:flex}
+#musicBtn .disc{display:inline-block;animation:spin 5s linear infinite paused;opacity:.55}
+#musicBtn.playing .disc{animation-play-state:running;opacity:1}
+#musicBtn.playing{box-shadow:0 0 18px rgba(212,162,78,.35)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* video */
+.vframe{border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 18px 44px rgba(0,0,0,.5);background:#000}
+.vframe video{width:100%;aspect-ratio:16/9;display:block}
+
 @media(min-width:700px){.couple{grid-template-columns:1fr auto 1fr;align-items:center}.amp{align-self:center;margin:0}}
 </style>
 </head>
@@ -224,6 +239,8 @@ footer b{color:var(--gold);letter-spacing:.2em}
   </div>
 </div>
 <div class="demo-tag">DEMO</div>
+<audio id="bgm" loop preload="auto" src="/tema/sinematik-nusantara/assets/bgm.m4a"></audio>
+<button id="musicBtn" aria-label="musik"><span class="disc">♪</span></button>
 
 <!-- COVER GATE -->
 <div id="gate">
@@ -345,6 +362,20 @@ footer b{color:var(--gold);letter-spacing:.2em}
         <p>Di bawah langit senja Danau Toba, Paulus melamar Maria disaksikan kedua keluarga — dan jawabannya adalah ya.</p></div>
       <div class="item rv"><div class="yr">2027</div><h4>Menuju Halal</h4>
         <p>Kami memutuskan mengikat janji suci dan memulai babak baru sebagai suami istri.</p></div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video">
+    <div class="sec-head rv">
+      <p class="eyebrow">Video</p>
+      <h2>Cuplikan <em>Bahagia</em></h2>
+      <div class="ulos-band"></div>
+    </div>
+    <div class="vframe rv">
+      <video id="pvVideo" controls playsinline preload="metadata"
+        poster="/tema/sinematik-nusantara/assets/prewed-1.webp"
+        src="/tema/sinematik-nusantara/assets/prewed-video.mp4"></video>
     </div>
   </section>
 
@@ -471,13 +502,28 @@ footer b{color:var(--gold);letter-spacing:.2em}
 
   // gate
   var gate = document.getElementById('gate');
+  var bgm = document.getElementById('bgm'), mBtn = document.getElementById('musicBtn');
+  var musicOn = false;
+  function setMusic(on){
+    musicOn = on;
+    if(on){ bgm.play().catch(function(){}); } else { bgm.pause(); }
+    mBtn.classList.toggle('playing', on);
+  }
+  mBtn.addEventListener('click', function(){ setMusic(!musicOn); });
   document.getElementById('openBtn').addEventListener('click', function(){
     gate.classList.add('open');
     document.body.style.overflow = '';
     setTimeout(function(){ gate.style.display = 'none'; }, 1300);
     document.getElementById('quote').scrollIntoView({behavior:'smooth'});
+    mBtn.classList.add('show');
+    setMusic(true);
   });
   document.body.style.overflow = 'hidden';
+
+  // video prewedding: jeda musik saat video diputar
+  var pv = document.getElementById('pvVideo'), wasPlaying = false;
+  pv.addEventListener('play', function(){ wasPlaying = musicOn; setMusic(false); });
+  pv.addEventListener('ended', function(){ if(wasPlaying) setMusic(true); });
 
   // fade-in halus tiap lapis cover setelah gambarnya siap (anti belang saat loading lambat)
   document.querySelectorAll('.layer img').forEach(function(img){

@@ -124,6 +124,12 @@ textarea{resize:vertical;min-height:64px}
     </div>
 
     <div class="card">
+      <h2>Video <span class="hint">— opsional</span></h2>
+      <label>Link video prewedding <span class="hint">— YouTube atau file mp4 langsung; kosong = seksi disembunyikan</span></label>
+      <input type="text" id="fVideoUrl" placeholder="https://www.youtube.com/watch?v=…" style="margin-top:6px">
+    </div>
+
+    <div class="card">
       <h2>Acara</h2>
       <label><b>Tanggal &amp; jam</b></label>
       <input type="datetime-local" id="fDt">
@@ -404,7 +410,8 @@ function collectOrder(){
     venue:$("fVenue").value.trim(), venue_addr:$("fVenueAddr").value.trim(), maps_q:$("fMapsQ").value.trim(),
     date_rsvp:$("fRsvp").value.trim(),
     gift1_bank:$("fG1b").value.trim(), gift1_num:$("fG1n").value.trim(), gift1_an:$("fG1a").value.trim(),
-    quote:$("fQuote").value.trim(), quote_src:$("fQuoteSrc").value.trim()
+    quote:$("fQuote").value.trim(), quote_src:$("fQuoteSrc").value.trim(),
+    video_url:$("fVideoUrl").value.trim()
   };
   if($("fG2c").checked){ o.gift2_bank=$("fG2b").value.trim(); o.gift2_num=$("fG2n").value.trim(); o.gift2_an=$("fG2a").value.trim(); }
   Object.assign(o, window._dates||{});
@@ -420,6 +427,14 @@ function validate(slug, order){
   if(slotCount()===0) errs.push("Minimal 1 foto.");
   if(slotCount()>30) errs.push("Maksimal 30 foto.");
   return errs;
+}
+function videoSection(url){
+  if(!url) return "";
+  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/);
+  const inner = m
+    ? `<iframe src="https://www.youtube.com/embed/${m[1]}" title="Video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    : `<video src="${url}" controls playsinline preload="metadata"></video>`;
+  return `<section id="video"><p class="eyebrow rv">Video</p><h2 class="title rv">Cuplikan Bahagia</h2><div class="vframe">${inner}</div></section>`;
 }
 function renderOrder(tpl, tema, slug, order, ph){
   // d = dict(tema) lalu order menimpa — persis build-order.py
@@ -451,6 +466,7 @@ function renderOrder(tpl, tema, slug, order, ph){
     d[`STORY_PHOTO_${i+1}`] = (ph.story||[])[i]
       ? `<div class="sph"><img src="${(ph.story||[])[i]}" alt="${esc("Cerita "+(i+1))}" loading="lazy"></div>` : "";
   }
+  d.VIDEO_SECTION = videoSection(order.video_url||"");
   if(order.gift2_bank) Object.assign(d,{
     GIFT2_BANK:order.gift2_bank, GIFT2_NUM:order.gift2_num,
     GIFT2_RAW:(order.gift2_num||"").replace(/\D/g,""),

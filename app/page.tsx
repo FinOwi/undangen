@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/undangen/navbar"
 import { Hero } from "@/components/undangen/hero"
-import { Marquee } from "@/components/undangen/marquee"
-import { Breathing } from "@/components/undangen/breathing"
+import { Tenun } from "@/components/undangen/tenun"
+import { Manifesto } from "@/components/undangen/manifesto"
 import { Themes } from "@/components/undangen/themes"
 import { Ritual } from "@/components/undangen/ritual"
 import { Steps } from "@/components/undangen/steps"
@@ -17,17 +17,14 @@ export default function Page() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee />
-        <Breathing line="Sebelum tamu tiba di hari bahagiamu, mereka tiba dulu di undanganmu." />
+        <Tenun />
+        <Manifesto />
         <Themes />
+        <Tenun />
         <Ritual />
         <Steps />
         <Pricing />
         <Faq />
-        <Breathing
-          line="Kenanganmu tak punya tanggal kedaluwarsa. Undanganmu pun begitu."
-          tone="light"
-        />
         <FinalCta />
       </main>
       <Footer />

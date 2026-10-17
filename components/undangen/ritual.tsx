@@ -1,5 +1,4 @@
-import { Badge } from "@/components/ui/badge"
-import { Ornament } from "@/components/undangen/ornament"
+import { Reveal } from "@/components/undangen/reveal"
 
 const MOMENTS = [
   {
@@ -19,61 +18,59 @@ const MOMENTS = [
   },
   {
     no: "04",
-    title: "Satu tap untuk hadir",
+    title: "Satu sentuhan untuk hadir",
     desc: "Konfirmasi kehadiran, kirim ucapan, hingga amplop digital — semuanya tanpa perlu install aplikasi apa pun.",
   },
 ]
 
-/**
- * The guest's journey — a vertical narrative, not a feature grid.
- * "The brain loves narratives. It distrusts lists."
- */
+/** Perjalanan tamu — narasi vertikal, bukan daftar fitur. */
 export function Ritual() {
   return (
-    <section id="pengalaman" className="relative bg-ink-950 py-20 sm:py-28">
-      <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <Badge
-            variant="outline"
-            className="border-gold-500/40 bg-gold-500/10 text-gold-300"
-          >
-            Pengalaman Tamu
-          </Badge>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-balance text-cream-50 sm:text-4xl lg:text-5xl">
-            Bukan dibuka. <span className="text-gold-gradient italic">Disambut.</span>
-          </h2>
-          <p className="max-w-xl text-cream-50/60">
-            Inilah yang dirasakan tamu dari detik pertama membuka undanganmu —
-            sebuah ritual kecil, bukan sekadar halaman web.
-          </p>
+    <section id="pengalaman" className="bg-ink-950 py-24 sm:py-36">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <Reveal>
+              <p className="text-xs font-medium tracking-[0.3em] text-gold-400 uppercase">
+                Pengalaman Tamu
+              </p>
+              <h2 className="mt-5 font-display text-[clamp(2.4rem,5.5vw,4rem)] leading-[1.02] font-bold tracking-tight text-balance text-cream-50">
+                Bukan dibuka. <span className="text-gold-gradient italic">Disambut.</span>
+              </h2>
+            </Reveal>
+          </div>
+          <Reveal delay={120}>
+            <p className="max-w-md text-base leading-relaxed text-cream-50/65 lg:pt-16">
+              Inilah yang dirasakan tamu dari detik pertama — sebuah ritual
+              kecil, bukan sekadar halaman web.
+            </p>
+          </Reveal>
         </div>
 
-        <ol className="relative mt-14 space-y-2">
-          <span
-            aria-hidden
-            className="absolute top-2 bottom-2 left-[27px] w-px bg-gradient-to-b from-gold-500/60 via-gold-500/20 to-transparent sm:left-[31px]"
-          />
-          {MOMENTS.map((m) => (
-            <li key={m.no} className="relative flex gap-6 py-6 sm:gap-8">
-              <span
-                aria-hidden
-                className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-gold-500/40 bg-ink-900 font-display text-sm font-bold text-gold-300 sm:h-16 sm:w-16"
-              >
-                {m.no}
-              </span>
-              <div className="pt-1 sm:pt-2">
-                <h3 className="font-display text-xl font-bold text-cream-50 sm:text-2xl">
+        <ol className="mt-14">
+          {MOMENTS.map((m, i) => (
+            <li
+              key={m.no}
+              className="grid gap-3 border-t border-cream-50/12 py-8 sm:grid-cols-[80px_1fr_1.4fr] sm:gap-8 sm:py-10"
+            >
+              <Reveal>
+                <span className="font-display text-5xl font-bold text-gold-500/35 tabular-nums">
+                  {m.no}
+                </span>
+              </Reveal>
+              <Reveal delay={80}>
+                <h3 className="font-display text-2xl font-bold text-cream-50 sm:text-[1.7rem]">
                   {m.title}
                 </h3>
-                <p className="mt-2 max-w-lg text-sm leading-relaxed text-cream-50/60 sm:text-base">
+              </Reveal>
+              <Reveal delay={160}>
+                <p className="max-w-lg text-sm leading-relaxed text-cream-50/60 sm:text-base">
                   {m.desc}
                 </p>
-              </div>
+              </Reveal>
             </li>
           ))}
         </ol>
-
-        <Ornament className="mt-8" />
       </div>
     </section>
   )

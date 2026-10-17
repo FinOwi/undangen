@@ -1,10 +1,10 @@
-import { Badge } from "@/components/ui/badge"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Reveal } from "@/components/undangen/reveal"
 
 const FAQS = [
   {
@@ -25,7 +25,7 @@ const FAQS = [
   },
   {
     q: "Bagaimana tamu membuka undangan?",
-    a: "Cukup satu link. Setiap tamu bahkan bisa dapat link personal dengan namanya sendiri, contoh: undangen.my.id/namamu/?to=Nama+Tamu.",
+    a: "Cukup satu link. Setiap tamu bahkan bisa dapat link personal dengan namanya sendiri.",
   },
   {
     q: "Berapa lama pengerjaannya?",
@@ -35,31 +35,32 @@ const FAQS = [
 
 export function Faq() {
   return (
-    <section id="faq" className="bg-cream-50 py-20 text-ink-950 sm:py-28">
-      <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <Badge
-            variant="outline"
-            className="border-gold-600/40 bg-gold-500/10 text-gold-700"
-          >
-            FAQ
-          </Badge>
-          <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-            Sering ditanyakan
-          </h2>
+    <section id="faq" className="bg-cream-50 py-24 text-ink-950 sm:py-36">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <Reveal>
+            <p className="text-xs font-medium tracking-[0.3em] text-gold-700 uppercase">
+              FAQ
+            </p>
+            <h2 className="mt-5 font-display text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.02] font-bold tracking-tight text-balance">
+              Sering <span className="italic text-gold-700">ditanyakan.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={120}>
+            <Accordion className="lg:pt-14">
+              {FAQS.map((f, i) => (
+                <AccordionItem key={i} value={`item-${i}`}>
+                  <AccordionTrigger className="text-left font-display text-lg font-bold">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="leading-relaxed text-ink-950/65">
+                    {f.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </Reveal>
         </div>
-        <Accordion className="mt-10">
-          {FAQS.map((f, i) => (
-            <AccordionItem key={i} value={`item-${i}`}>
-              <AccordionTrigger className="text-left font-medium">
-                {f.q}
-              </AccordionTrigger>
-              <AccordionContent className="leading-relaxed text-ink-950/65">
-                {f.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
       </div>
     </section>
   )

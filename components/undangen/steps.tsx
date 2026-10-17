@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui/badge"
+import { Reveal } from "@/components/undangen/reveal"
 
 const STEPS = [
   {
@@ -25,36 +25,37 @@ const STEPS = [
 
 export function Steps() {
   return (
-    <section id="cara-pesan" className="bg-cream-50 py-20 text-ink-950 sm:py-28">
+    <section id="cara-pesan" className="bg-cream-50 py-24 text-ink-950 sm:py-36">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
-          <Badge
-            variant="outline"
-            className="border-gold-600/40 bg-gold-500/10 text-gold-700"
-          >
+        <Reveal>
+          <p className="text-xs font-medium tracking-[0.3em] text-gold-700 uppercase">
             Cara Pesan
-          </Badge>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            Dari cerita menjadi <span className="italic">undangan.</span>
+          </p>
+          <h2 className="mt-5 max-w-2xl font-display text-[clamp(2.4rem,5.5vw,4rem)] leading-[1.02] font-bold tracking-tight text-balance">
+            Dari cerita menjadi <span className="italic text-gold-700">undangan.</span>
           </h2>
-          <p className="text-ink-950/60">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-950/60">
             Empat langkah tenang — tanpa formulir rumit, tanpa uang muka.
           </p>
-        </div>
+        </Reveal>
 
-        <ol className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map((s) => (
+        <ol className="mt-14 grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map((s, i) => (
             <li
               key={s.no}
-              className="relative rounded-xl border border-ink-950/10 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)]"
+              className="border-t-2 border-ink-950/80 py-7"
             >
-              <span aria-hidden="true" className="font-display text-4xl font-bold text-gold-600/50">
-                {s.no}
-              </span>
-              <h3 className="mt-3 font-display text-lg font-bold">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-950/60">
-                {s.desc}
-              </p>
+              <Reveal delay={i * 90}>
+                <span className="font-display text-sm font-bold tracking-[0.2em] text-gold-700">
+                  {s.no}
+                </span>
+                <h3 className="mt-3 font-display text-xl font-bold">
+                  {s.title}
+                </h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-ink-950/60">
+                  {s.desc}
+                </p>
+              </Reveal>
             </li>
           ))}
         </ol>

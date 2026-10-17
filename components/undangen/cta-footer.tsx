@@ -1,36 +1,35 @@
 import { Button } from "@/components/ui/button"
 import { WA_LINK } from "@/data/site"
+import { Reveal } from "@/components/undangen/reveal"
 
 export function FinalCta() {
   return (
-    <section className="relative overflow-hidden bg-ink-950 py-20 sm:py-28">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-      >
-        <div className="absolute top-1/2 left-1/2 h-80 w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-500/15 blur-3xl" />
-      </div>
-      <div className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4 text-center sm:px-6">
-        <p className="font-display text-3xl font-bold tracking-tight text-cream-50 sm:text-5xl">
-          Momen bahagiamu layak{" "}
-          <span className="text-gold-gradient">dirayakan</span> dengan indah
-        </p>
-        <p className="max-w-xl text-cream-50/60">
-          Ceritakan acaramu hari ini — biarkan kami yang menyulapnya jadi
-          undangan digital yang bikin tamu terkesan.
-        </p>
-        <Button
-          size="lg"
-          className="bg-gold-shimmer animate-shimmer bg-gold-500 px-8 font-semibold text-ink-950 hover:bg-gold-400"
-          render={
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer">
-              Chat WhatsApp Sekarang →
-            </a>
-          }
-        />
-        <p className="text-xs text-cream-50/60">
-          Respon cepat • Tanpa komitmen • Bayar setelah cocok
-        </p>
+    <section className="relative bg-ink-950 py-28 sm:py-40">
+      <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-4 text-center sm:px-6">
+        <Reveal>
+          <p className="text-xs font-medium tracking-[0.3em] text-gold-400 uppercase">
+            Mulai hari ini
+          </p>
+          <h2 className="mt-6 font-display text-[clamp(2.8rem,7vw,5.5rem)] leading-[1] font-bold tracking-tight text-balance text-cream-50">
+            Momen bahagiamu layak <span className="text-gold-gradient italic">dirayakan</span> dengan indah.
+          </h2>
+          <p className="mx-auto mt-7 max-w-xl text-base leading-relaxed text-cream-50/60">
+            Ceritakan acaramu hari ini — biarkan kami yang menyulapnya jadi
+            undangan digital yang bikin tamu terkesan.
+          </p>
+          <Button
+            size="lg"
+            className="mt-10 bg-gold-500 px-9 py-6 text-base font-semibold text-ink-950 hover:bg-gold-400"
+            render={
+              <a href={WA_LINK} target="_blank" rel="noopener noreferrer">
+                Chat WhatsApp Sekarang →
+              </a>
+            }
+          />
+          <p className="mt-6 text-xs tracking-wide text-cream-50/45">
+            Respon cepat • Tanpa komitmen • Bayar setelah cocok
+          </p>
+        </Reveal>
       </div>
     </section>
   )
@@ -38,30 +37,33 @@ export function FinalCta() {
 
 export function Footer() {
   return (
-    <footer className="border-t border-cream-50/10 bg-ink-950 py-10">
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-4 sm:px-6">
-        <a href="#" className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gold-shimmer font-display text-lg font-bold text-ink-950">
+    <footer className="border-t border-cream-50/10 bg-ink-950 py-12">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-7 px-4 sm:px-6">
+        <a href="#" className="flex items-center gap-2.5" aria-label="Undangen">
+          <span className="flex h-9 w-9 items-center justify-center bg-gold-500 font-display text-lg font-bold text-ink-950">
             U
           </span>
           <span className="font-display text-xl font-bold tracking-wide text-cream-50">
             Undangen
           </span>
         </a>
-        <p className="text-center text-sm text-cream-50/50">
+        <p className="max-w-md text-center text-sm leading-relaxed text-cream-50/50">
           Undangan digital premium — pernikahan, aqiqah, khitanan, ulang
           tahun, wisuda & korporat.
         </p>
-        <div className="flex items-center gap-6 text-sm text-cream-50/50">
-          <a href="#tema" className="transition-colors hover:text-gold-300">
-            Tema
-          </a>
-          <a href="#harga" className="transition-colors hover:text-gold-300">
-            Harga
-          </a>
-          <a href="#faq" className="transition-colors hover:text-gold-300">
-            FAQ
-          </a>
+        <nav
+          className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3 text-sm text-cream-50/50"
+          aria-label="Navigasi footer"
+        >
+          {[
+            ["#tema", "Tema"],
+            ["#harga", "Harga"],
+            ["#faq", "FAQ"],
+          ].map(([href, label]) => (
+            <a key={href} href={href} className="transition-colors hover:text-gold-300">
+              {label}
+            </a>
+          ))}
           <a
             href={WA_LINK}
             target="_blank"
@@ -70,8 +72,8 @@ export function Footer() {
           >
             WhatsApp
           </a>
-        </div>
-        <p className="text-xs text-cream-50/60">
+        </nav>
+        <p className="text-xs text-cream-50/40">
           © 2026 Undangen by FinOwi Id • undangen.my.id
         </p>
       </div>

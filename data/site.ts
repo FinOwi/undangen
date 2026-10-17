@@ -162,6 +162,22 @@ export const THEMES: Theme[] = [
     art: "from-lime-100 via-green-50 to-amber-100",
     artText: "text-green-900",
   },
+  {
+    slug: "sinematik-nusantara",
+    name: "Sinematik Nusantara",
+    tagline: "Sehari di Tanah Karo — background yang bercerita",
+    art: "from-amber-200 via-orange-100 to-stone-300",
+    artText: "text-stone-800",
+    badge: "Baru",
+  },
+  {
+    slug: "undangan-karo",
+    name: "Undangan Karo",
+    tagline: "Uis gara, tenun, dan Rakut Sitelu",
+    art: "from-red-800 via-red-900 to-stone-950",
+    artText: "text-amber-100",
+    badge: "Baru",
+  },
 ]
 
 export const WA_NUMBER = "6288279406268"

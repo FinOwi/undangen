@@ -1,0 +1,201 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]: DEMO
+  - generic [ref=e9]:
+    - paragraph [ref=e10]: Undangan Pernikahan
+    - heading [level=1] [ref=e11]:
+      - text: Paulus
+      - emphasis [ref=e12]: "&"
+      - text: Maria
+    - paragraph [ref=e13]: SABTU · 12 DESEMBER 2027
+    - generic [ref=e14]:
+      - text: Kepada Yth.Bapak/Ibu/Saudara/i
+      - generic [ref=e15]: Tamu Undangan
+    - button "Buka Undangan" [ref=e16] [cursor=pointer]
+  - main [ref=e17]:
+    - generic [ref=e19]:
+      - generic [ref=e20]: P · M
+      - blockquote [ref=e21]: "\"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.\""
+      - generic [ref=e22]: "QS. Ar-Rūm : 21"
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - paragraph [ref=e25]: Mempelai
+        - heading [level=2] [ref=e26]:
+          - text: Dua Hati,
+          - emphasis [ref=e27]: Satu Tujuan
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - img "Maria br Ginting" [ref=e32]
+          - heading "Maria br Ginting" [level=3] [ref=e33]
+          - generic [ref=e34]: Mempelai Wanita
+          - paragraph [ref=e35]: Putri dari Bapak Ngadep Ginting & Ibu Beru Sembiring
+        - generic [ref=e36]: "&"
+        - generic [ref=e37]:
+          - img "Paulus Tarigan" [ref=e39]
+          - heading "Paulus Tarigan" [level=3] [ref=e40]
+          - generic [ref=e41]: Mempelai Pria
+          - paragraph [ref=e42]: Putra dari Bapak Malo Tarigan & Ibu Beru Karo
+    - generic [ref=e43]:
+      - generic [ref=e44]:
+        - paragraph [ref=e45]: Save The Date
+        - heading [level=2] [ref=e46]:
+          - text: Menghitung
+          - emphasis [ref=e47]: Hari Bahagia
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]: "420"
+          - generic [ref=e52]: Hari
+        - generic [ref=e53]:
+          - generic [ref=e54]: "07"
+          - generic [ref=e55]: Jam
+        - generic [ref=e56]:
+          - generic [ref=e57]: "02"
+          - generic [ref=e58]: Menit
+        - generic [ref=e59]:
+          - generic [ref=e60]: "25"
+          - generic [ref=e61]: Detik
+      - link "Simpan Tanggal" [ref=e63] [cursor=pointer]:
+        - /url: "#"
+    - generic [ref=e64]:
+      - generic [ref=e65]:
+        - paragraph [ref=e66]: Waktu & Tempat
+        - heading [level=2] [ref=e67]:
+          - text: Rangkaian
+          - emphasis [ref=e68]: Acara
+      - generic [ref=e70]:
+        - heading "Pemberkatan" [level=3] [ref=e71]
+        - paragraph [ref=e72]: SABTU · 12 DESEMBER 2027 · 09.00 WIB
+        - paragraph [ref=e73]: GBKP Simpang Selayang
+        - paragraph [ref=e74]: Jl. Ngumban Surbakti No. 10, Medan
+        - link "Lihat Peta" [ref=e75] [cursor=pointer]:
+          - /url: https://maps.google.com/?q=GBKP+Simpang+Selayang+Medan
+      - generic [ref=e76]:
+        - heading "Adat & Resepsi" [level=3] [ref=e77]
+        - paragraph [ref=e78]: SABTU · 12 DESEMBER 2027 · 11.00 — 15.00 WIB
+        - paragraph [ref=e79]: Jambur Tara Bunga
+        - paragraph [ref=e80]: Jl. Jamin Ginting Km. 12, Berastagi
+        - link "Lihat Peta" [ref=e81] [cursor=pointer]:
+          - /url: https://maps.google.com/?q=Berastagi+Karo
+    - generic [ref=e82]:
+      - generic [ref=e83]:
+        - paragraph [ref=e84]: Cerita Kami
+        - heading [level=2] [ref=e85]:
+          - text: Perjalanan
+          - emphasis [ref=e86]: Cinta
+      - generic [ref=e88]:
+        - generic [ref=e89]:
+          - generic [ref=e90]: "2019"
+          - heading "Awal Berjumpa" [level=4] [ref=e91]
+          - img "Awal berjumpa" [ref=e93]
+          - paragraph [ref=e94]: Tak disangka, perkenalan singkat di sebuah acara kampus di Medan menjadi awal dari segalanya.
+        - generic [ref=e95]:
+          - generic [ref=e96]: "2024"
+          - heading "Melamar dengan Adat" [level=4] [ref=e97]
+          - img "Lamaran adat" [ref=e99]
+          - paragraph [ref=e100]: Di bawah langit senja Danau Toba, Paulus melamar Maria disaksikan kedua keluarga — dan jawabannya adalah ya.
+        - generic [ref=e101]:
+          - generic [ref=e102]: "2027"
+          - heading "Menuju Halal" [level=4] [ref=e103]
+          - paragraph [ref=e104]: Kami memutuskan mengikat janji suci dan memulai babak baru sebagai suami istri.
+    - generic [ref=e105]:
+      - generic [ref=e106]:
+        - paragraph [ref=e107]: Galeri
+        - heading [level=2] [ref=e108]:
+          - text: Momen
+          - emphasis [ref=e109]: Bahagia
+          - text: Kami
+      - generic [ref=e111]:
+        - link "Momen 1" [ref=e112] [cursor=pointer]:
+          - /url: assets/prewed-1.webp
+          - img "Momen 1"
+        - link "Momen 2" [ref=e113] [cursor=pointer]:
+          - /url: assets/groom.webp
+          - img "Momen 2"
+        - link "Momen 3" [ref=e114] [cursor=pointer]:
+          - /url: assets/prewed-2.webp
+          - img "Momen 3"
+        - link "Momen 4" [ref=e115] [cursor=pointer]:
+          - /url: assets/bride.webp
+          - img "Momen 4"
+        - link "Momen 5" [ref=e116] [cursor=pointer]:
+          - /url: assets/village.webp
+          - img "Momen 5"
+        - link "Momen 6" [ref=e117] [cursor=pointer]:
+          - /url: assets/sky.webp
+          - img "Momen 6"
+    - generic [ref=e118]:
+      - generic [ref=e119]:
+        - paragraph [ref=e120]: Tanda Kasih
+        - heading [level=2] [ref=e121]:
+          - text: Amplop
+          - emphasis [ref=e122]: Digital
+        - paragraph [ref=e124]: "Doa restu Anda adalah hadiah terindah.Namun jika berkenan memberi tanda kasih:"
+      - generic [ref=e125]:
+        - generic [ref=e126]: Bank BCA
+        - generic [ref=e127]: 8210 1234 56
+        - generic [ref=e128]: a.n. Paulus Tarigan
+        - button "Salin Nomor" [ref=e129] [cursor=pointer]
+      - generic [ref=e130]:
+        - generic [ref=e131]: Kado Fisik
+        - generic [ref=e132]: Paulus & MariaJl. Jamin Ginting No. 88, Berastagi0821-6000-1122
+        - button "Salin Alamat" [ref=e133] [cursor=pointer]
+    - generic [ref=e134]:
+      - generic [ref=e135]:
+        - paragraph [ref=e136]: Konfirmasi
+        - heading [level=2] [ref=e137]:
+          - text: RSVP
+          - emphasis [ref=e138]: Kehadiran
+      - generic [ref=e140]:
+        - generic [ref=e141]: Nama
+        - textbox "Nama Anda" [ref=e142]
+        - generic [ref=e143]: Kehadiran
+        - generic [ref=e144]:
+          - generic [ref=e145] [cursor=pointer]: Hadir
+          - generic [ref=e146] [cursor=pointer]: Berhalangan
+        - generic [ref=e147]: Jumlah tamu
+        - combobox [ref=e148]:
+          - option "1" [selected]
+          - option "2"
+          - option "3"
+          - option "4"
+        - button "Kirim Konfirmasi" [ref=e149] [cursor=pointer]
+    - generic [ref=e150]:
+      - generic [ref=e151]:
+        - paragraph [ref=e152]: Doa & Ucapan
+        - heading [level=2] [ref=e153]:
+          - text: Kirim
+          - emphasis [ref=e154]: Doa Terbaik
+      - generic [ref=e156]:
+        - generic [ref=e157]: Nama
+        - textbox "Nama Anda" [ref=e158]
+        - generic [ref=e159]: Ucapan
+        - textbox "Tulis doa terbaik..." [ref=e160]
+        - button "Kirim Ucapan" [ref=e161] [cursor=pointer]
+      - generic [ref=e162]:
+        - generic [ref=e163]:
+          - text: Beru Ginting
+          - generic [ref=e164]: Hadir
+          - paragraph [ref=e165]: Selamat menempuh hidup baru, sehat-sehat dan diberkati selalu!
+        - generic [ref=e166]:
+          - text: Pa Tarigan
+          - generic [ref=e167]: Hadir
+          - paragraph [ref=e168]: Mejuah-juah! Lancar sampai hari H.
+    - generic [ref=e170]:
+      - paragraph [ref=e171]: Terima Kasih
+      - paragraph [ref=e172]:
+        - text: Sampai jumpa di
+        - emphasis [ref=e173]: hari bahagia
+        - text: kami.
+      - paragraph [ref=e175]: Mejuah-juah,
+      - paragraph [ref=e176]: Paulus & Maria
+  - contentinfo [ref=e177]: "UNDANGEN Undangan digital premium · undangen.my.id Tema demo: Sinematik Nusantara"
+  - navigation [ref=e178]:
+    - link "Beranda" [ref=e179] [cursor=pointer]:
+      - /url: "#quote"
+    - link "Mempelai" [ref=e180] [cursor=pointer]:
+      - /url: "#mempelai"
+    - link "Acara" [ref=e181] [cursor=pointer]:
+      - /url: "#acara"
+    - link "Galeri" [ref=e182] [cursor=pointer]:
+      - /url: "#galeri"
+    - link "Ucapan" [ref=e183] [cursor=pointer]:
+      - /url: "#ucapan"

@@ -36,11 +36,10 @@ a{color:inherit}
   background:linear-gradient(180deg,#3d5a8a 0%,#c98d5f 55%,#f0b96a 78%,#7a4a26 100%)}
 #gate.open{transform:translateY(-100%);opacity:.98;pointer-events:none}
 .scene{position:absolute;inset:-6% 0}
-.layer{position:absolute;inset:0;background-size:cover;background-position:center bottom;will-change:transform}
-.l-sky{background-image:url('assets/sky.webp')}
-.l-mtn{background-image:url('assets/mountains.webp');mix-blend-mode:multiply;opacity:.92}
-.l-vil{background-image:url('assets/village.webp');mix-blend-mode:multiply}
-.l-fol{background-image:url('assets/foliage.webp');mix-blend-mode:multiply}
+.layer{position:absolute;inset:0;will-change:transform;overflow:hidden}
+.layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom}
+.l-mtn img,.l-vil img,.l-fol img{mix-blend-mode:multiply}
+.l-mtn{opacity:.94}
 .scene::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,12,6,.28),rgba(20,12,6,.06) 35%,rgba(16,10,6,.72))}
 .gate-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;z-index:5}
 .eyebrow{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
@@ -182,10 +181,10 @@ footer b{color:var(--gold);letter-spacing:.2em}
 <!-- COVER GATE -->
 <div id="gate">
   <div class="scene" id="scene">
-    <div class="layer l-sky" data-depth="0.04"></div>
-    <div class="layer l-mtn" data-depth="0.10"></div>
-    <div class="layer l-vil" data-depth="0.18"></div>
-    <div class="layer l-fol" data-depth="0.30"></div>
+    <div class="layer l-sky" data-depth="0.04"><img src="assets/sky.webp" alt="" fetchpriority="high"></div>
+    <div class="layer l-mtn" data-depth="0.10"><img src="assets/mountains.webp" alt="" fetchpriority="high"></div>
+    <div class="layer l-vil" data-depth="0.18"><img src="assets/village.webp" alt="" fetchpriority="high"></div>
+    <div class="layer l-fol" data-depth="0.30"><img src="assets/foliage.webp" alt="" fetchpriority="high"></div>
   </div>
   <div class="gate-inner">
     <p class="eyebrow">Undangan Pernikahan</p>

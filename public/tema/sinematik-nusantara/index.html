@@ -37,7 +37,8 @@ a{color:inherit}
 #gate.open{transform:translateY(-100%);opacity:.98;pointer-events:none}
 .scene{position:absolute;inset:-6% 0}
 .layer{position:absolute;inset:0;will-change:transform;overflow:hidden}
-.layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom}
+.layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom;
+  opacity:0;transition:opacity 1.4s ease}
 /* blend di level .layer (bukan img) supaya nge-blend dgn layer di bawahnya,
    bukan terisolasi oleh stacking context dari transform */
 .l-mtn,.l-vil,.l-fol{mix-blend-mode:multiply}
@@ -477,6 +478,13 @@ footer b{color:var(--gold);letter-spacing:.2em}
     document.getElementById('quote').scrollIntoView({behavior:'smooth'});
   });
   document.body.style.overflow = 'hidden';
+
+  // fade-in halus tiap lapis cover setelah gambarnya siap (anti belang saat loading lambat)
+  document.querySelectorAll('.layer img').forEach(function(img){
+    var show = function(){ img.style.opacity = 1; };
+    if(img.complete && img.naturalWidth) show();
+    else img.addEventListener('load', show);
+  });
 
   // parallax layers
   var layers = Array.prototype.slice.call(document.querySelectorAll('.layer'));

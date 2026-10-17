@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#9E1B1B">
+<title>Surya &amp; Ayu — Undangan Karo (Demo) — Undangen</title>
+<meta name="description" content="Demo tema Undangan Karo: palet uis gara, ornamen tenun, Rakut Sitelu. Oleh Undangen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>/* Palet dari uis gara: merah, hitam, putih kapas, benang emas */
+:root {
+  --gara: #9E1B1B;
+  --hitam: #17110F;
+  --kapas: #F1E8D6;
+  --emas: #B8862F;
+  /* garis tenun: selvage kain, bukan hiasan acak */
+  --tenun: linear-gradient(var(--emas) 0 2px, var(--hitam) 2px 6px, var(--kapas) 6px 8px, var(--hitam) 8px 12px, var(--emas) 12px 14px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--hitam); }
+body { font-family: 'Alegreya', Georgia, serif, Georgia, serif; font-size: 1.2rem; line-height: 1.6; }
+:focus-visible { outline: 3px solid var(--emas); outline-offset: 3px; }
+
+.kain { max-width: 520px; margin: 0 auto; }
+.tengah { text-align: center; }
+.bagian { padding: 72px 28px; }
+.gara { background: var(--gara); color: var(--kapas); }
+.kapas { background: var(--kapas); color: var(--hitam); }
+.hitam { background: var(--hitam); color: var(--kapas); }
+
+h1, h2, h3, .n, .tamu strong, .penutup, .ucapan b { font-family: 'Young Serif', Georgia, serif, serif; font-weight: 400; }
+h2 { font-size: 2.1rem; line-height: 1.1; margin-bottom: 28px; }
+h3 { font-size: 1.5rem; line-height: 1.2; }
+
+/* Pita segitiga bergaya pucuk rebung: hanya di sampul dan penutup */
+.pita {
+  height: 34px;
+  background: var(--hitam) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='34'%3E%3Cpath d='M0 34L16 6l16 28z' fill='%23B8862F'/%3E%3Cpath d='M10 34l6-14 6 14z' fill='%239E1B1B'/%3E%3C/svg%3E") repeat-x bottom;
+}
+.pita.bawah { transform: scaleY(-1); }
+.tenun { height: 14px; background: var(--tenun); }
+
+/* Sampul (gerbang) */
+.gerbang {
+  position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column;
+  background: var(--gara); color: var(--kapas);
+  transition: transform .9s cubic-bezier(.7, 0, .2, 1), visibility 0s .9s;
+}
+.gerbang.terbuka { transform: translateY(-100%); visibility: hidden; }
+.gerbang-isi { flex: 1; width: 100%; max-width: 520px; margin: 0 auto; padding: 0 28px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 26px; }
+.jenis { font-style: italic; font-size: 1.3rem; }
+.sampul-nama { line-height: 1; }
+.orang, .sampul-nama em { display: block; }
+.n { display: block; font-size: clamp(3.2rem, 16vw, 4.6rem); line-height: 1; }
+.k { display: block; font-style: italic; margin-top: 6px; }
+.sampul-nama em { margin: 14px 0; font-size: 1.15rem; }
+.tamu { border: 1px solid var(--emas); outline: 1px solid var(--emas); outline-offset: 5px; padding: 14px 32px; min-width: 250px; }
+.tamu small { display: block; font-style: italic; }
+.tamu strong { font-size: 1.5rem; }
+
+/* Tombol: siku, tanpa pil */
+.tombol { display: inline-block; font: inherit; font-size: 1.05rem; background: var(--kapas); color: var(--hitam); border: 0; border-radius: 0; padding: 14px 30px; cursor: pointer; text-decoration: none; }
+.tombol:hover { background: var(--emas); }
+.tombol.kecil { padding: 9px 20px; font-size: .95rem; }
+.kapas .tombol { background: var(--hitam); color: var(--kapas); }
+.kapas .tombol:hover { background: var(--gara); }
+.musik { position: fixed; bottom: 16px; right: max(16px, calc(50% - 244px)); z-index: 40; background: var(--hitam) !important; color: var(--kapas) !important; border: 1px solid var(--emas); }
+
+/* Isi */
+.bingkai { position: relative; aspect-ratio: 4 / 5; margin: 16px; box-shadow: 0 0 0 6px var(--kapas), 0 0 0 8px var(--gara), 0 0 0 14px var(--kapas), 0 0 0 16px var(--hitam); }
+.cover { object-fit: cover; }
+.sapa { font-size: 2.8rem; margin: 44px 0 6px; }
+.tanggal { font-size: 1.35rem; }
+.salam { font-size: 1.35rem; font-style: italic; max-width: 32ch; margin: 0 auto; }
+.nama { font-size: 2.7rem; line-height: 1.05; margin: 0 0 4px; }
+.klan { font-size: 1.05rem; margin-bottom: 12px; color: var(--gara); font-weight: 700; }
+.ortu { font-style: italic; max-width: 30ch; margin: 0 auto; }
+.belah { width: 14px; height: 14px; background: var(--gara); transform: rotate(45deg); margin: 44px auto; }
+
+.acara { border: 1px solid var(--kapas); outline: 1px solid var(--kapas); outline-offset: 5px; padding: 28px 20px; margin: 34px 6px 0; display: grid; gap: 10px; justify-items: center; }
+.rakut { margin-top: 40px; }
+.rakut h3 { color: var(--emas); }
+.rakut small { display: block; font-style: italic; opacity: .8; margin-bottom: 8px; }
+.rakut ul { list-style: none; }
+
+.galeri { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.foto { position: relative; aspect-ratio: 3 / 4; }
+.foto:nth-child(even) { margin-top: 28px; }
+
+.rekening { display: grid; gap: 6px; justify-items: center; margin-top: 24px; }
+.nomor { font-family: 'Young Serif', Georgia, serif, serif; font-size: 1.8rem; letter-spacing: .04em; }
+
+.form { display: grid; gap: 18px; }
+.form label { display: grid; gap: 6px; }
+.form input, .form select, .form textarea { font: inherit; padding: 12px; border: 1px solid var(--kapas); border-radius: 0; background: transparent; color: var(--kapas); }
+.form option { color: var(--hitam); }
+.jebakan { position: absolute; left: -9999px; }
+.galat { background: var(--hitam); padding: 10px 14px; border-left: 4px solid var(--emas); }
+.terkirim { text-align: center; font-size: 1.3rem; font-style: italic; }
+.ucapan { list-style: none; margin-top: 44px; display: grid; gap: 14px; max-height: 440px; overflow: auto; }
+.ucapan li { background: var(--hitam); padding: 14px 16px; border-left: 4px solid var(--emas); }
+.ucapan b { display: block; }
+
+.penutup { font-size: 2.6rem; line-height: 1.1; margin-bottom: 8px; }
+
+@media (prefers-reduced-motion: reduce) { .gerbang { transition: none; } }
+
+/* --- tambahan demo statis --- */
+.cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bingkai img.cover,.foto img.cover{position:absolute}
+.demo-tag{position:fixed;top:14px;right:14px;z-index:60;background:rgba(23,17,15,.75);color:#B8862F;
+  border:1px solid #B8862F;font-size:.72rem;letter-spacing:.22em;padding:7px 14px 7px 16px;border-radius:999px;
+  backdrop-filter:blur(6px);font-family:'Alegreya',serif}
+.undangen-foot{padding:26px;text-align:center;font-size:.95rem;color:#B8862F;background:#17110F;
+  border-top:1px solid #B8862F;font-style:italic}
+</style>
+</head>
+<body>
+<div class="demo-tag">DEMO</div>
+<audio id="bgm" loop preload="auto" src="/tema/undangan-karo/assets/bgm.m4a"></audio>
+<main class="kain"><div class="gerbang" aria-hidden="false"><div class="pita"></div><div class="gerbang-isi tengah"><p class="jenis">Kerja Erdemu Bayu</p><h1 class="sampul-nama"><span class="orang"><span class="n">Surya</span><span class="k">Merga <!-- -->Ginting</span></span><em>dan</em><span class="orang"><span class="n">Ayu</span><span class="k">Beru <!-- -->Sembiring</span></span></h1><div class="tamu"><small>Kepada Yth.</small><strong>Bapak Budi</strong></div><button class="tombol">Buka undangan</button></div><div class="tenun"></div><div class="pita bawah"></div></div><header class="bagian kapas tengah"><div class="bingkai"><img class="cover" src="/tema/undangan-karo/assets/prewed-1.webp" alt="Surya dan Ayu"></div><h2 class="sapa">Mejuah-juah</h2><p class="tanggal">Sabtu, 6 Februari 2027</p></header><div class="tenun"></div><section class="bagian hitam tengah"><p class="salam">Mejuah-juah kita kerina. Dengan penuh syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberi restu pada pernikahan kami.</p></section><div class="tenun"></div><section class="bagian kapas tengah"><h2 class="nama">Surya</h2><p class="klan">Merga <!-- -->Ginting</p><p class="ortu">Putra dari Bapak Ngasup Ginting dan Ibu Lina br Sembiring</p><div class="belah"></div><h2 class="nama">Ayu</h2><p class="klan">Beru <!-- -->Sembiring</p><p class="ortu">Putri dari Bapak Riko Sembiring dan Ibu Dewi br Tarigan</p></section><div class="tenun"></div><section class="bagian gara tengah"><h2>Waktu dan tempat</h2><article class="acara"><h3>Pemberkatan</h3><p>Sabtu, 6 Februari 2027<!-- -->, pukul <!-- -->09.00 WIB</p><p><b>GBKP Kabanjahe</b><br/>Kabanjahe, Tanah Karo</p><a class="tombol kecil" href="https://maps.google.com" target="_blank" rel="noreferrer">Buka peta</a></article><article class="acara"><h3>Kerja Adat</h3><p>Sabtu, 6 Februari 2027<!-- -->, pukul <!-- -->12.00 WIB</p><p><b>Jambur Simalem</b><br/>Berastagi, Tanah Karo</p><a class="tombol kecil" href="https://maps.google.com" target="_blank" rel="noreferrer">Buka peta</a></article></section><section class="bagian hitam tengah"><h2>Rakut Sitelu</h2><p class="ortu">Kami, keluarga besar kedua mempelai, mengundang Anda.</p><div class="rakut"><h3>Kalimbubu</h3><small>keluarga pemberi gadis</small><ul><li>Keluarga besar Ginting</li></ul></div><div class="rakut"><h3>Senina</h3><small>saudara semerga</small><ul><li>Keluarga besar Sembiring</li></ul></div><div class="rakut"><h3>Anak Beru</h3><small>keluarga penerima gadis</small><ul><li>Keluarga besar Tarigan</li></ul></div></section><div class="tenun"></div><section class="bagian kapas" aria-label="Galeri foto"><div class="galeri"><div class="foto"><img class="cover" src="/tema/undangan-karo/assets/prewed-2.webp" alt="Foto mempelai"></div><div class="foto"><img class="cover" src="/tema/undangan-karo/assets/bride.webp" alt="Foto mempelai"></div><div class="foto"><img class="cover" src="/tema/undangan-karo/assets/groom.webp" alt="Foto mempelai"></div><div class="foto"><img class="cover" src="/tema/undangan-karo/assets/village.webp" alt="Foto mempelai"></div></div></section><section class="bagian kapas tengah"><h2>Tanda kasih</h2><div class="rekening"><b>BCA</b><span class="nomor">1234567890</span><small>a.n. <!-- -->Surya Ginting</small><button type="button" class="tombol kecil">Salin nomor</button></div></section><div class="tenun"></div><section class="bagian gara"><h2 class="tengah">Kehadiran dan ucapan</h2><form class="form" action="" encType="multipart/form-data" method="POST"><input type="hidden" name="$ACTION_REF_1"/><input type="hidden" name="$ACTION_1:0" value="{&quot;id&quot;:&quot;6004ee9f0a754f978439ae427709cd8604d14924dc&quot;,&quot;bound&quot;:&quot;$@1&quot;}"/><input type="hidden" name="$ACTION_1:1" value="[null]"/><input type="hidden" name="$ACTION_KEY" value="kb4196458d392a85be882e106033893e4"/><input type="hidden" name="slug" value="demo"/><input tabindex="-1" autoComplete="off" class="jebakan" aria-hidden="true" name="situs"/><label>Nama<input required="" maxLength="60" name="nama" value="Bapak Budi"/></label><label>Kehadiran<select name="hadir" required=""><option value="" disabled="" selected="">Pilih salah satu</option><option value="hadir">Hadir</option><option value="tidak">Tidak bisa hadir</option><option value="ragu">Belum pasti</option></select></label><label>Jumlah tamu<input type="number" min="1" max="10" name="jumlah" value="1"/></label><label>Ucapan<textarea name="ucapan" rows="4" maxLength="400"></textarea></label><button class="tombol">Kirim ucapan</button></form><ul class="ucapan"></ul></section><div class="pita"></div><footer class="bagian hitam tengah"><p class="penutup">Mejuah-juah</p><p class="ortu">Terima kasih atas doa dan kehadiran Anda.</p></footer></main>
+<div class="undangen-foot">Dibuat dengan ♥ oleh <b>Undangen</b> — undangen.my.id</div>
+<script>
+// ?to= nama tamu
+var to = new URLSearchParams(location.search).get('to');
+if (to) {
+  var el = document.querySelector('.tamu strong');
+  if (el) el.textContent = to.slice(0, 60);
+  var nm = document.querySelector('.form input[name="nama"]');
+  if (nm) nm.value = to.slice(0, 60);
+}
+// Gerbang + musik
+var gerbang = document.querySelector('.gerbang');
+var bgm = document.getElementById('bgm');
+var musicBtn = null;
+document.body.style.overflow = 'hidden';
+function toggleMusic() {
+  if (bgm.paused) { bgm.play().catch(function(){}); } else { bgm.pause(); }
+  if (musicBtn) musicBtn.textContent = bgm.paused ? 'Putar musik' : 'Jeda musik';
+}
+var openBtn = document.querySelector('.gerbang .tombol');
+if (openBtn) openBtn.addEventListener('click', function() {
+  gerbang.classList.add('terbuka');
+  document.body.style.overflow = '';
+  setTimeout(function(){ gerbang.style.display = 'none'; }, 950);
+  if (!musicBtn) {
+    musicBtn = document.createElement('button');
+    musicBtn.className = 'tombol kecil musik';
+    musicBtn.textContent = 'Jeda musik';
+    musicBtn.addEventListener('click', toggleMusic);
+    document.body.appendChild(musicBtn);
+  }
+  bgm.play().then(function(){ musicBtn.textContent = 'Jeda musik'; }).catch(function(){ musicBtn.textContent = 'Putar musik'; });
+});
+// Salin nomor rekening
+document.querySelectorAll('.rekening').forEach(function(r) {
+  var btn = r.querySelector('button');
+  var nomor = r.querySelector('.nomor').textContent.trim();
+  btn.addEventListener('click', function() {
+    function done() { btn.textContent = 'Tersalin!'; setTimeout(function(){ btn.textContent = 'Salin nomor'; }, 1600); }
+    if (navigator.clipboard) navigator.clipboard.writeText(nomor).then(done).catch(done);
+    else done();
+  });
+});
+// RSVP demo lokal
+var form = document.querySelector('.form');
+if (form) form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  var nama = form.nama.value.trim(), hadir = form.hadir.value, ucapan = form.ucapan.value.trim();
+  if (!nama || !hadir) return;
+  var li = document.createElement('li');
+  var b = document.createElement('b'); b.textContent = nama;
+  var p = document.createElement('p'); p.textContent = ucapan || (hadir === 'hadir' ? 'Hadir, Mejuah-juah!' : hadir === 'tidak' ? 'Tidak bisa hadir' : 'Belum pasti');
+  li.appendChild(b); li.appendChild(p);
+  var ul = document.querySelector('.ucapan');
+  ul.insertBefore(li, ul.firstChild);
+  form.outerHTML = '<p class="terkirim">Ucapan terkirim. Terima kasih, Mejuah-juah.</p>';
+});
+// honeypot: sembunyikan dari submit
+var hp = document.querySelector('.jebakan');
+if (hp && hp.value) { /* bot */ }
+</script>
+</body>
+</html>

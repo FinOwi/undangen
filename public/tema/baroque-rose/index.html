@@ -89,6 +89,15 @@ section{padding:80px 22px;position:relative;max-width:640px;margin:0 auto;text-a
 .sec-title{font-size:clamp(30px,8vw,44px);font-weight:600;line-height:1.12;margin-bottom:10px}
 .sec-sub{color:var(--muted);font-weight:300;max-width:420px;margin:0 auto 32px;line-height:1.7}
 .divider{width:150px;margin:24px auto;display:block}
+.sec-orn{width:min(300px,74vw);margin:0 auto 28px;display:block}
+.framed{position:relative}
+.framed::before,.framed::after{content:"";position:absolute;width:86px;height:58px;
+  background:url(/tema/baroque-rose/assets/gold-corner.png) no-repeat;background-size:contain;
+  opacity:.85;pointer-events:none;z-index:1}
+.framed::before{top:8px;left:8px}
+.framed::after{bottom:8px;right:8px;transform:scale(-1,-1)}
+.verse-box{border:1px solid var(--line);border-radius:20px;padding:38px 26px;
+  background:rgba(255,255,255,.55);max-width:520px;margin:0 auto;box-shadow:0 10px 28px rgba(150,110,60,.08)}
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s ease}
 .reveal.in{opacity:1;transform:none}
 /* couple */
@@ -311,6 +320,8 @@ var ROSE = {
   <div class="sec-eyebrow reveal">Let's Celebrate</div>
   <h2 class="sec-title serif reveal">Our Wedding</h2>
   <p class="sec-sub reveal">Dua hati, satu tujuan — kami menanti kehadiran Anda di hari paling bahagia kami.</p>
+  <img class="sec-orn reveal" src="/tema/baroque-rose/assets/divider.png" alt="">
+
   <div class="arch reveal">
     <svg viewBox="0 0 300 420" fill="none">
       <path d="M28 400 L28 160 A122 122 0 0 1 272 160 L272 400" stroke="#c19a3f" stroke-width="3"/>
@@ -326,8 +337,10 @@ var ROSE = {
 
 <!-- ================= VERSE ================= -->
 <section id="verse">
-  <p class="verse-text serif reveal" id="vAyat"></p>
-  <div class="verse-src reveal" id="vSrc"></div>
+  <div class="verse-box framed">
+    <p class="verse-text serif reveal" id="vAyat"></p>
+    <div class="verse-src reveal" id="vSrc"></div>
+  </div>
 </section>
 
 <!-- ================= COUNTDOWN ================= -->
@@ -335,6 +348,8 @@ var ROSE = {
   <div class="sec-eyebrow reveal">Save The Date</div>
   <h2 class="sec-title serif reveal">Menuju Hari Bahagia</h2>
   <p class="sec-sub reveal">Hitung mundur menuju momen yang kami nanti — sampai jumpa di hari bahagia!</p>
+  <img class="sec-orn reveal" src="/tema/baroque-rose/assets/divider.png" alt="">
+
   <div class="cd-grid reveal">
     <div class="cd-box"><b id="cdD">0</b><span>Hari</span></div>
     <div class="cd-box"><b id="cdH">0</b><span>Jam</span></div>
@@ -347,6 +362,8 @@ var ROSE = {
   <div class="sec-eyebrow reveal">Momen Kami</div>
   <h2 class="sec-title serif reveal">Galeri Bahagia</h2>
   <p class="sec-sub reveal">Setiap foto menyimpan cerita — ketuk untuk melihat lebih dekat.</p>
+  <img class="sec-orn reveal" src="/tema/baroque-rose/assets/divider.png" alt="">
+
   <div class="gal-grid reveal" id="galGrid"></div>
 </section>
 
@@ -355,7 +372,9 @@ var ROSE = {
   <div class="sec-eyebrow reveal">Waktu &amp; Tempat</div>
   <h2 class="sec-title serif reveal">Rangkaian Acara</h2>
   <p class="sec-sub reveal">Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
-  <div class="ev-card reveal">
+  <img class="sec-orn reveal" src="/tema/baroque-rose/assets/divider.png" alt="">
+
+  <div class="ev-card framed reveal">
     <img class="ev-orn" src="/tema/baroque-rose/assets/flower-swag.png" alt="">
     <h3 id="eAkadT">Akad Nikah</h3>
     <div class="ev-when">
@@ -366,7 +385,7 @@ var ROSE = {
     <p class="ev-place"><span id="eAkadJam">08.00 – 10.00 WIB</span><br><span id="eAkadP"></span></p>
     <a class="btn-ghost" id="eAkadMaps" href="#" target="_blank" rel="noopener">Lihat Lokasi</a>
   </div>
-  <div class="ev-card reveal">
+  <div class="ev-card framed reveal">
     <img class="ev-orn" src="/tema/baroque-rose/assets/flower-swag.png" alt="">
     <h3 id="eResT">Resepsi</h3>
     <div class="ev-when">
@@ -384,7 +403,9 @@ var ROSE = {
   <div class="sec-eyebrow reveal">Konfirmasi Kehadiran</div>
   <h2 class="sec-title serif reveal">RSVP</h2>
   <p class="sec-sub reveal">Kehadiran Anda sangat berarti bagi kami. Mohon konfirmasi sebelum hari-H ya!</p>
-  <div class="rsvp-form reveal">
+  <img class="sec-orn reveal" src="/tema/baroque-rose/assets/divider.png" alt="">
+
+  <div class="rsvp-form framed reveal">
     <div class="field"><label>Nama</label><input id="rNama" placeholder="Nama lengkap"></div>
     <div class="field"><label>Kehadiran</label>
       <div class="radio-row">
@@ -405,6 +426,8 @@ var ROSE = {
   <div class="sec-eyebrow reveal">Tanda Kasih</div>
   <h2 class="sec-title serif reveal">Wedding Gift</h2>
   <p class="sec-sub reveal">Doa restu Anda adalah hadiah terindah. Namun jika berkenan memberi tanda kasih, kami sediakan dengan penuh syukur:</p>
+  <img class="sec-orn reveal" src="/tema/baroque-rose/assets/divider.png" alt="">
+
   <div id="giftList" class="reveal"></div>
   <p class="addr reveal" id="gAddr"></p>
 </section>
@@ -515,7 +538,7 @@ $("rSend").addEventListener("click",function(){
 });
 var gl=$("giftList");
 (R.REK||[]).forEach(function(r){
-  var c=document.createElement("div");c.className="gift-card";
+  var c=document.createElement("div");c.className="gift-card framed";
   c.innerHTML='<div class="bank">'+r.b.replace(/</g,"&lt;")+'</div><div class="no">'+r.n.replace(/</g,"&lt;")+'</div><div class="an">a.n. '+r.a.replace(/</g,"&lt;")+'</div>';
   var b=document.createElement("button");b.className="copy-btn";b.textContent="Salin Nomor";
   b.addEventListener("click",function(){

@@ -33,6 +33,26 @@ h2 em{font-style:italic;font-weight:500;color:var(--gold)}
 @keyframes drift3{to{transform:translate(-6vmax,-8vmax) scale(1.15)}}
 #bgCraft .grain{position:absolute;inset:0;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.6'/></svg>")}
 #bgCraft .vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 42%,rgba(8,6,4,.78) 100%)}
+/* --- peta jalan perjalanan + achievement --- */
+#roadmap{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+section,footer{position:relative;z-index:1}
+.trav-ring{transform-box:fill-box;transform-origin:center;animation:ping2 2.2s ease-out infinite}
+@keyframes ping2{0%{transform:scale(.5);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+.node{fill:#14100c;stroke:#6b5a2e;stroke-width:3;transition:fill .5s,stroke .5s}
+.node.on{fill:#e8b95a;stroke:#ffe6ad}
+#achToast{position:fixed;left:50%;bottom:78px;transform:translate(-50%,24px);z-index:72;background:rgba(20,16,12,.95);border:1px solid var(--gold-deep);outline:1px solid var(--gold-deep);outline-offset:4px;padding:14px 26px;text-align:center;opacity:0;pointer-events:none;transition:opacity .4s,transform .45s cubic-bezier(.2,.9,.3,1.25);max-width:330px}
+#achToast.show{opacity:1;transform:translate(-50%,0)}
+#achToast .t{font-size:10px;letter-spacing:.34em;color:var(--gold);font-weight:500}
+#achToast .n{font-family:'Bodoni Moda',serif;font-size:1.4rem;margin-top:5px;color:var(--cream)}
+#lightbox{position:fixed;inset:0;z-index:90;background:rgba(8,6,4,.95);display:none;flex-direction:column;align-items:center;justify-content:center;padding:26px;gap:16px}
+#lightbox.show{display:flex}
+#lightbox img{max-width:100%;max-height:56vh;object-fit:contain;border:1px solid var(--gold-deep);outline:1px solid var(--gold-deep);outline-offset:5px}
+#lightbox .lt{font-size:10px;letter-spacing:.34em;color:var(--gold);font-weight:500}
+#lightbox .ln{font-family:'Bodoni Moda',serif;font-size:1.6rem;color:var(--cream)}
+#lightbox .lc{color:var(--cream-dim);font-size:.9rem;letter-spacing:.14em}
+.lb-row{display:flex;gap:14px}
+.lb-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--gold-deep);background:transparent;color:var(--gold);font-size:20px;cursor:pointer}
+#lbClose{position:absolute;top:18px;right:18px}
 .wrap{position:relative;z-index:2}
 #dust{position:fixed;inset:0;z-index:61;pointer-events:none;opacity:.5}
 .demo-tag{position:fixed;top:14px;right:14px;z-index:80;background:rgba(20,16,12,.78);color:var(--gold);border:1px solid var(--gold-deep);font-size:11px;letter-spacing:.24em;padding:8px 14px;border-radius:999px;backdrop-filter:blur(6px)}
@@ -104,7 +124,7 @@ footer{padding:60px 28px 90px;text-align:center;color:var(--cream-dim)}
 footer .mono{display:inline-flex;width:54px;height:54px;background:var(--gold);color:var(--ink);align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-weight:800;font-size:26px;margin-bottom:18px}
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
 .rv.on{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}#gate .bg{animation:none}.orb{animation:none}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}#gate .bg{animation:none}.orb{animation:none}.trav-ring{animation:none}}
 </style>
 </head>
 <body>
@@ -126,6 +146,14 @@ footer .mono{display:inline-flex;width:54px;height:54px;background:var(--gold);c
 </div>
 
 <div class="wrap">
+<svg id="roadmap" viewBox="0 0 520 100" preserveAspectRatio="none" aria-hidden="true">
+  <path id="roadPath" d="M 260 0 C 120 10, 400 18, 260 28 C 120 38, 400 46, 260 56 C 120 66, 400 74, 260 84 C 180 92, 340 96, 260 100" fill="none" stroke="#050403" stroke-width="46" opacity="1" vector-effect="non-scaling-stroke" />
+  <path d="M 260 0 C 120 10, 400 18, 260 28 C 120 38, 400 46, 260 56 C 120 66, 400 74, 260 84 C 180 92, 340 96, 260 100" fill="none" stroke="#b8862f" stroke-width="38" opacity=".14" vector-effect="non-scaling-stroke" />
+  <path d="M 260 0 C 120 10, 400 18, 260 28 C 120 38, 400 46, 260 56 C 120 66, 400 74, 260 84 C 180 92, 340 96, 260 100" fill="none" stroke="#171209" stroke-width="38" opacity="1" vector-effect="non-scaling-stroke" />
+  <path d="M 260 0 C 120 10, 400 18, 260 28 C 120 38, 400 46, 260 56 C 120 66, 400 74, 260 84 C 180 92, 340 96, 260 100" fill="none" stroke="#e8b95a" stroke-width="3.5" opacity=".85" vector-effect="non-scaling-stroke" stroke-dasharray="18 16"/>
+  <g id="nodes"></g>
+  <g id="traveler"><circle class="trav-ring" r="13" fill="none" stroke="#e8b95a" stroke-width="2.5"/><circle r="7" fill="#e8b95a" stroke="#14100c" stroke-width="2.5"/></g>
+</svg>
   <section id="quote" style="text-align:center">
     <p class="eyebrow rv">Kutipan</p>
     <p class="serif rv" style="font-size:1.5rem;font-style:italic;line-height:1.5">"Pendidikan adalah senjata paling ampuh untuk mengubah dunia."</p>
@@ -206,11 +234,15 @@ footer .mono{display:inline-flex;width:54px;height:54px;background:var(--gold);c
   <section id="galeri">
     <p class="eyebrow rv">Galeri</p>
     <h2 class="rv">Momen <em>perjalanan.</em></h2>
-    <div class="gal rv">
-      <img src="/tema/tema-kuliah/assets/babak1-gerbang.webp" alt="Gerbang" loading="lazy">
-      <img src="/tema/tema-kuliah/assets/babak2-begadang.webp" alt="Belajar" loading="lazy">
-      <img src="/tema/tema-kuliah/assets/babak3-toga.webp" alt="Wisuda" loading="lazy">
-      <img src="/tema/tema-kuliah/assets/babak4-cta.webp" alt="Rayakan" loading="lazy">
+    <div class="gal rv" id="galGrid">
+      <img src="/tema/tema-kuliah/assets/babak1-gerbang.webp" data-title="Gerbang Impian" alt="Gerbang kampus" loading="lazy">
+      <img src="/tema/tema-kuliah/assets/foto5-perpus.webp" data-title="Sarang Ilmu" alt="Perpustakaan" loading="lazy">
+      <img src="/tema/tema-kuliah/assets/babak2-begadang.webp" data-title="Begadang Berjuang" alt="Begadang belajar" loading="lazy">
+      <img src="/tema/tema-kuliah/assets/foto6-teman.webp" data-title="Sahabat Seperjuangan" alt="Teman kampus" loading="lazy">
+      <img src="/tema/tema-kuliah/assets/foto7-sidang.webp" data-title="Sidang Akhir" alt="Sidang skripsi" loading="lazy">
+      <img src="/tema/tema-kuliah/assets/babak3-toga.webp" data-title="Toga Terbang" alt="Topi toga" loading="lazy">
+      <img src="/tema/tema-kuliah/assets/foto8-malam.webp" data-title="Malam Refleksi" alt="Kampus malam" loading="lazy">
+      <img src="/tema/tema-kuliah/assets/babak4-cta.webp" data-title="Perayaan" alt="Perayaan" loading="lazy">
     </div>
   </section>
   <div class="tenun"></div>
@@ -317,9 +349,107 @@ if (!reduceMotion) {
     requestAnimationFrame(loop);
   })(0);
 }
+// peta jalan + achievement di setiap page & foto
+(function(){
+  if (reduceMotion) return;
+  var svg = document.getElementById('roadmap'),
+      path = document.getElementById('roadPath'),
+      trav = document.getElementById('traveler'),
+      nodeG = document.getElementById('nodes'),
+      NS = 'http://www.w3.org/2000/svg';
+  var stops = [
+    ['quote','Kutipan Abadi'],['wisudawan','Sang Wisudawan'],['countdown','Detik-Detik Akhir'],
+    ['acara','Hari Penentuan'],['cerita','Empat Babak'],['galeri','Galeri Kenangan'],
+    ['gift','Tanda Kasih'],['rsvp','Konfirmasi Kehadiran']
+  ];
+  var fired = {};
+  function docH(){ return Math.max(1, document.documentElement.scrollHeight - innerHeight); }
+  function buildNodes(){
+    var L = path.getTotalLength(), H = docH(), vh = innerHeight;
+    nodeG.innerHTML = '';
+    stops.forEach(function(s){
+      var sec = document.getElementById(s[0]); if (!sec || !L) return;
+      var f = (sec.getBoundingClientRect().top + scrollY + sec.offsetHeight/2 - vh/2) / H;
+      f = Math.min(.985, Math.max(.015, f));
+      var q = path.getPointAtLength(f * L);
+      var c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', q.x.toFixed(1)); c.setAttribute('cy', q.y.toFixed(1));
+      c.setAttribute('r', 11); c.setAttribute('class', 'node' + (fired[s[0]] ? ' on' : ''));
+      c.dataset.stop = s[0];
+      nodeG.appendChild(c);
+    });
+  }
+  function moveTrav(){
+    var L = path.getTotalLength(); if (!L) return;
+    var p = Math.min(1, Math.max(0, scrollY / docH()));
+    var pt = path.getPointAtLength(p * L);
+    trav.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ')');
+  }
+  var toast = document.getElementById('achToast'), achName = document.getElementById('achName'), toastT;
+  function unlock(name){
+    achName.textContent = name;
+    toast.classList.add('show');
+    clearTimeout(toastT);
+    toastT = setTimeout(function(){ toast.classList.remove('show'); }, 2800);
+  }
+  function fire(id, name){
+    if (fired[id] || !name) return; fired[id] = 1;
+    var n = nodeG.querySelector('[data-stop="' + id + '"]');
+    if (n) n.setAttribute('class', 'node on');
+    unlock(name);
+  }
+  var io2 = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) fire(e.target.id, e.target.dataset.ach); });
+  }, {threshold:.35});
+  stops.forEach(function(s){
+    var sec = document.getElementById(s[0]); if (!sec) return;
+    sec.dataset.ach = s[1]; io2.observe(sec);
+  });
+  var bNames = ['Gerbang','Perjuangan','Klimaks','Perayaan'];
+  document.querySelectorAll('.babak').forEach(function(b, i){
+    b.id = 'babak' + i;
+    b.dataset.ach = 'Babak ' + (i+1) + ': ' + bNames[i];
+    io2.observe(b);
+  });
+  var ticking = false;
+  addEventListener('scroll', function(){
+    if (!ticking){ ticking = true; requestAnimationFrame(function(){ moveTrav(); ticking = false; }); }
+  }, {passive:true});
+  addEventListener('resize', function(){ buildNodes(); moveTrav(); });
+  addEventListener('load', function(){ buildNodes(); moveTrav(); });
+  buildNodes(); moveTrav();
+  var f0 = document.getElementById('rsvpForm');
+  if (f0) f0.addEventListener('submit', function(){ setTimeout(function(){ unlock('Doa Terkirim'); }, 400); });
+  var imgs = Array.prototype.slice.call(document.querySelectorAll('#galGrid img')),
+      lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'),
+      lbName = document.getElementById('lbName'), lbCount = document.getElementById('lbCount'), cur = 0;
+  function show(i){
+    cur = (i + imgs.length) % imgs.length;
+    lbImg.src = imgs[cur].src;
+    lbName.textContent = imgs[cur].dataset.title || 'Momen';
+    lbCount.textContent = (cur+1) + ' / ' + imgs.length;
+    lb.classList.add('show'); document.body.style.overflow = 'hidden';
+  }
+  function hide(){ lb.classList.remove('show'); document.body.style.overflow = ''; }
+  imgs.forEach(function(im, i){ im.addEventListener('click', function(){ show(i); }); });
+  document.getElementById('lbClose').addEventListener('click', hide);
+  document.getElementById('lbPrev').addEventListener('click', function(e){ e.stopPropagation(); show(cur-1); });
+  document.getElementById('lbNext').addEventListener('click', function(e){ e.stopPropagation(); show(cur+1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb) hide(); });
+})();
 // reveal
 var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }); }, {threshold:.12});
 document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
 </script>
+
+<div id="achToast" role="status"><div class="t">🏆 PENCAPAIAN TERBUKA</div><div class="n" id="achName"></div></div>
+<div id="lightbox" role="dialog" aria-label="Foto">
+  <button class="lb-btn" id="lbClose" aria-label="Tutup">✕</button>
+  <div class="lt">📷 FOTO DITEMUKAN</div>
+  <img id="lbImg" src="" alt="Foto galeri">
+  <div class="ln" id="lbName"></div>
+  <div class="lc" id="lbCount"></div>
+  <div class="lb-row"><button class="lb-btn" id="lbPrev" aria-label="Sebelumnya">‹</button><button class="lb-btn" id="lbNext" aria-label="Berikutnya">›</button></div>
+</div>
 </body>
 </html>

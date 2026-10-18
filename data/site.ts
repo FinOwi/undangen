@@ -26,6 +26,14 @@ export const THEMES: Theme[] = [
     artText: "text-amber-100",
     badge: "Baru",
   },
+  {
+    slug: "wisuda-quest",
+    name: "Wisuda Quest",
+    tagline: "Main game: lewati 8 semester menuju toga",
+    art: "from-blue-950 via-stone-950 to-amber-950",
+    artText: "text-amber-100",
+    badge: "Baru",
+  },
 ]
 
 export const WA_NUMBER = "6288279406268"

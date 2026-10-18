@@ -17,7 +17,15 @@ export const THEMES: Theme[] = [
     art: "from-sky-200 via-slate-200 to-emerald-100",
     artText: "text-slate-800",
     badge: "Baru",
-  }
+  },
+  {
+    slug: "rpg-cinta",
+    name: "RPG Cinta",
+    tagline: "Main game: jelajahi kampung, masuki tiap bangunan",
+    art: "from-emerald-950 via-stone-950 to-amber-950",
+    artText: "text-amber-100",
+    badge: "Baru",
+  },
 ]
 
 export const WA_NUMBER = "6288279406268"

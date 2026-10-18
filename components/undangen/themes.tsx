@@ -15,15 +15,15 @@ export function Themes() {
                 Koleksi Tema
               </p>
               <h2 className="mt-5 font-display text-[clamp(2.4rem,5.5vw,4rem)] leading-[1.02] font-bold tracking-tight text-balance text-cream-50">
-                Dua puluh empat <span className="text-gold-gradient italic">dunia.</span>
+                Satu <span className="text-gold-gradient italic">dunia.</span>
               </h2>
             </Reveal>
           </div>
           <Reveal delay={120}>
             <p className="max-w-md text-base leading-relaxed text-cream-50/65 lg:pt-16">
-              Dari kemegahan adat hingga neon kota — setiap tema disutradarai
-              sebagai pengalaman, bukan sekadar ganti warna. Klik dan rasakan
-              demonya, persis seperti yang akan dilihat tamumu.
+              Setiap tema disutradarai sebagai pengalaman, bukan sekadar ganti
+              warna. Klik dan rasakan demonya, persis seperti yang akan
+              dilihat tamumu. Koleksi baru segera hadir.
             </p>
           </Reveal>
         </div>

@@ -131,6 +131,20 @@ h2.disp{font-family:var(--disp);font-size:clamp(38px,10vw,58px);line-height:1;ma
 #lb button{position:absolute;top:calc(env(safe-area-inset-top,0px) + 14px);right:14px;background:none;border:1px solid rgba(255,246,227,.4);color:var(--cream);border-radius:8px;padding:6px 12px;font-size:16px;cursor:pointer}
 footer.site{text-align:center;padding:34px 20px calc(env(safe-area-inset-bottom,0px) + 90px);color:var(--muted);font-size:12px;letter-spacing:.14em}
 @media (prefers-reduced-motion:reduce){.rv,.rv-z{opacity:1;transform:none;transition:none}.dia,.mq-track,#penutup .bg{animation:none}}
+
+/* ===== SINEMATIK ===== */
+.bab-num{position:absolute;top:-26px;right:-6px;font-family:var(--disp);font-size:clamp(96px,28vw,180px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(242,185,13,.30);z-index:0;pointer-events:none;user-select:none}
+.wrap>*:not(.bab-num){position:relative;z-index:1}
+h2.disp .ch{display:inline-block;opacity:0;transform:translateY(.45em) rotate(5deg);transition:opacity .5s ease,transform .65s cubic-bezier(.2,.9,.3,1.25)}
+h2.disp.in .ch,.in h2.disp .ch{opacity:1;transform:none}
+.interlude{position:relative;min-height:88svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:70px 24px}
+.il-bg{position:absolute;inset:-8%;background:radial-gradient(105% 100% at 50% 18%,#421016 0%,#17090c 55%,#0b0b0d 100%);animation:ilz 24s ease-in-out infinite alternate}
+@keyframes ilz{from{transform:scale(1)}to{transform:scale(1.18)}}
+.il-q{position:relative;z-index:1;font-family:var(--quote);font-style:italic;font-size:clamp(22px,6vw,30px);line-height:1.65;color:var(--cream);margin:0}
+.il-s{display:block;margin-top:20px;font-size:11px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;position:relative;z-index:1}
+.kb{will-change:transform;animation:kbz 26s ease-in-out infinite alternate}
+@keyframes kbz{from{transform:scale(1.03)}to{transform:scale(1.17) translate(-1.5%,1.5%)}}
+@media (prefers-reduced-motion:reduce){.kb,.il-bg{animation:none}h2.disp .ch{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body class="locked">
@@ -582,6 +596,64 @@ document.getElementById('rsvpForm').addEventListener('submit', function(e){
   }
 });
 loadUcapan();
+
+/* ===== SINEMATIK: bab, interlude, ken burns, huruf stagger ===== */
+(function(){
+  var BABS = [
+    ['mempelai','I','BAB I · SANG PENGANTIN'],
+    ['kisah','II','BAB II · GARIS WAKTU CINTA'],
+    ['filosofi','III','BAB III · FILOSOFI'],
+    ['acara','IV','BAB IV · WARI KERJA'],
+    ['galeri','V','BAB V · GALERI'],
+    ['keluarga','VI','BAB VI · KELUARGA BESAR'],
+    ['rsvp','VII','BAB VII · RSVP & UCAPAN']
+  ];
+  BABS.forEach(function(b){
+    var sec = document.getElementById(b[0]); if (!sec) return;
+    var wrap = sec.querySelector('.wrap'); if (!wrap) return;
+    var num = document.createElement('div'); num.className = 'bab-num'; num.textContent = b[1];
+    wrap.insertBefore(num, wrap.firstChild);
+    var kick = sec.querySelector('.kicker'); if (kick) kick.textContent = b[2];
+  });
+  /* interlude fullscreen */
+  var ILS = [
+    {after:'mempelai', q:'Dua keluarga, satu adat — hari ini kami menulis bab pertama.', s:'Menuju Bab II · Garis Waktu Cinta'},
+    {after:'kisah', q:'Setiap pemberhentian adalah doa yang dikabulkan satu per satu.', s:'Menuju Bab III · Filosofi'},
+    {after:'acara', q:'Mejuah-juah! Yang datang membawa berkat bagi kedua mempelai.', s:'Menuju Bab V · Galeri'}
+  ];
+  ILS.forEach(function(il){
+    var sec = document.getElementById(il.after); if (!sec) return;
+    var d = document.createElement('section'); d.className = 'interlude';
+    d.innerHTML = '<div class="il-bg"></div>'
+      + '<svg style="position:absolute;left:50%;top:50%;width:220px;height:220px;margin:-110px;opacity:.06;fill:#f2b90d;pointer-events:none" viewBox="0 0 120 120" aria-hidden="true"><use href="#gecko"/></svg>'
+      + '<div class="wrap"><p class="il-q rv">\u201C' + il.q + '\u201D</p><span class="il-s rv">' + il.s + '</span></div>';
+    sec.parentNode.insertBefore(d, sec.nextSibling);
+    d.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  });
+  /* ken burns di semua foto */
+  document.querySelectorAll('.tl-item img, .sc img, .venue .ph, .dia img').forEach(function(im){ im.classList.add('kb'); });
+  /* stagger per huruf di judul bab */
+  document.querySelectorAll('h2.disp').forEach(function(h){
+    var nodes = Array.prototype.slice.call(h.childNodes);
+    h.innerHTML = '';
+    nodes.forEach(function(nd){
+      if (nd.nodeType === 3) {
+        nd.textContent.split('').forEach(function(c){ addCh(h, c, null); });
+      } else if (nd.nodeName === 'BR') { h.appendChild(document.createElement('br')); }
+      else {
+        var w = nd.cloneNode(false);
+        nd.textContent.split('').forEach(function(c){ addCh(w, c, null); });
+        h.appendChild(w);
+      }
+    });
+    var chs = h.querySelectorAll('.ch');
+    chs.forEach(function(c, i){ c.style.transitionDelay = (i * 26) + 'ms'; });
+  });
+  function addCh(parent, c){
+    if (c === ' ') { parent.appendChild(document.createTextNode('\u00A0')); return; }
+    var s = document.createElement('span'); s.className = 'ch'; s.textContent = c; parent.appendChild(s);
+  }
+})();
 </script>
 </body>
 </html>

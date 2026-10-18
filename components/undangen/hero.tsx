@@ -24,7 +24,7 @@ export function Hero() {
             <Button
               size="lg"
               className="bg-gold-500 px-7 font-semibold text-ink-950 hover:bg-gold-400"
-              render={<a href="#tema">Jelajahi 23 Tema</a>}
+              render={<a href="#tema">Jelajahi 24 Tema</a>}
             />
             <a
               href={WA_LINK}
@@ -37,7 +37,7 @@ export function Hero() {
           </div>
           <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-cream-50/10 pt-7">
             {[
-              { value: "23", label: "Tema eksklusif" },
+              { value: "24", label: "Tema eksklusif" },
               { value: "∞", label: "Aktif selamanya" },
               { value: "Rp0", label: "Di muka*" },
             ].map((s) => (

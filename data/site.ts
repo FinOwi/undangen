@@ -178,6 +178,14 @@ export const THEMES: Theme[] = [
     artText: "text-amber-100",
     badge: "Baru",
   },
+  {
+    slug: "tema-kuliah",
+    name: "Tema Kuliah",
+    tagline: "Undangan wisuda sinematik empat babak",
+    art: "from-stone-900 via-amber-950 to-stone-900",
+    artText: "text-amber-100",
+    badge: "Baru",
+  },
 ]
 
 export const WA_NUMBER = "6288279406268"

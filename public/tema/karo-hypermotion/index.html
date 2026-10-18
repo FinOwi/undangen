@@ -21,7 +21,8 @@ body.locked{overflow:hidden}
 img{display:block;max-width:100%}
 button{font-family:inherit}
 /* ---------- ornamen ---------- */
-.beka{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath d='M0 56 L56 0' stroke='%23f2b90d' stroke-opacity='.14' stroke-width='7'/%3E%3Cpath d='M0 0 L56 56' stroke='%23f2b90d' stroke-opacity='.08' stroke-width='7'/%3E%3C/svg%3E")}
+.beka{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath d='M0 56 L56 0' stroke='%23f2b90d' stroke-opacity='.14' stroke-width='7'/%3E%3Cpath d='M0 0 L56 56' stroke='%23f2b90d' stroke-opacity='.08' stroke-width='7'/%3E%3C/svg%3E");animation:bekaflow 38s linear infinite}
+@keyframes bekaflow{to{background-position:56px 56px}}
 .gecko{position:absolute;pointer-events:none;opacity:.1;fill:var(--gold)}
 .kicker{font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
 h2.disp{font-family:var(--disp);font-size:clamp(38px,10vw,58px);line-height:1;margin:.25em 0;letter-spacing:.02em}
@@ -145,6 +146,18 @@ h2.disp.in .ch,.in h2.disp .ch{opacity:1;transform:none}
 .kb{will-change:transform;animation:kbz 26s ease-in-out infinite alternate}
 @keyframes kbz{from{transform:scale(1.03)}to{transform:scale(1.17) translate(-1.5%,1.5%)}}
 @media (prefers-reduced-motion:reduce){.kb,.il-bg{animation:none}h2.disp .ch{opacity:1;transform:none;transition:none}}
+
+/* ===== BACKGROUND KARO INTERAKTIF ===== */
+.uis-strip{position:relative;height:46px;overflow:hidden;background-color:#0c0c0e;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='46' viewBox='0 0 120 46'%3E%3Crect width='120' height='46' fill='%230c0c0e'/%3E%3Cpath d='M-6 23 L9 7 L24 23 L39 7 L54 23 L69 7 L84 23 L99 7 L114 23 L129 7' stroke='%23e11d2e' stroke-width='6' fill='none'/%3E%3Cpath d='M-6 23 L9 39 L24 23 L39 39 L54 23 L69 39 L84 23 L99 39 L114 23 L129 39' stroke='%23e11d2e' stroke-width='6' fill='none'/%3E%3Cg fill='%23f2b90d'%3E%3Crect x='4.5' y='18.5' width='9' height='9' transform='rotate(45 9 23)'/%3E%3Crect x='34.5' y='18.5' width='9' height='9' transform='rotate(45 39 23)'/%3E%3Crect x='64.5' y='18.5' width='9' height='9' transform='rotate(45 69 23)'/%3E%3Crect x='94.5' y='18.5' width='9' height='9' transform='rotate(45 99 23)'/%3E%3C/g%3E%3C/svg%3E");background-size:120px 46px;animation:uisflow 16s linear infinite}
+.uis-strip::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,217,104,.13) 50%,transparent 65%);background-size:220% 100%;animation:uissh 6s linear infinite}
+@keyframes uisflow{to{background-position-x:120px}}
+@keyframes uissh{from{background-position:220% 0}to{background-position:-120% 0}}
+.mandala{position:absolute;left:calc(50% - 170px);top:70px;width:340px;height:340px;opacity:.10;z-index:0;pointer-events:none;animation:mspin 70s linear infinite}
+@keyframes mspin{to{transform:rotate(360deg)}}
+.village{position:absolute;left:0;right:0;bottom:0;width:100%;height:150px;z-index:0;pointer-events:none}
+.village .win{animation:winflick 2.8s ease-in-out infinite}
+@keyframes winflick{50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.uis-strip,.uis-strip::after,.mandala,.village .win,.beka{animation:none!important}}
 </style>
 </head>
 <body class="locked">
@@ -460,17 +473,25 @@ document.querySelectorAll('.tilt').forEach(function(card){
   card.addEventListener('mouseleave', function(){ inner.style.transform = 'rotateY(0) rotateX(0)'; });
 });
 
-/* ---------- partikel debu emas ---------- */
+/* ---------- partikel debu emas: INTERAKTIF (menghindar dari sentuhan) ---------- */
 (function(){
   if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
   var cv = document.getElementById('debu'), ctx = cv.getContext('2d'), P = [];
+  var mX = -9999, mY = -9999;
+  addEventListener('pointermove', function(e){ mX = e.clientX; mY = e.clientY; }, {passive:true});
+  addEventListener('pointerleave', function(){ mX = -9999; mY = -9999; });
   function size(){ cv.width = innerWidth; cv.height = innerHeight; }
   size(); addEventListener('resize', size);
-  for (var i = 0; i < 46; i++) P.push({x: Math.random(), y: Math.random(), r: .8 + Math.random() * 2.4, s: .0004 + Math.random() * .0012, o: .25 + Math.random() * .55, ph: Math.random() * 6.28});
+  for (var i = 0; i < 60; i++) P.push({x: Math.random(), y: Math.random(), r: .8 + Math.random() * 2.6, s: .0004 + Math.random() * .0012, o: .25 + Math.random() * .55, ph: Math.random() * 6.28, vx: 0, vy: 0});
   (function loop(t){
     ctx.clearRect(0, 0, cv.width, cv.height);
     P.forEach(function(p){
-      p.y -= p.s; if (p.y < -.02) { p.y = 1.02; p.x = Math.random(); }
+      p.vy -= p.s * .12; p.vx *= .94; p.vy *= .94;
+      var dx = p.x * cv.width - mX, dy = p.y * cv.height - mY, d2 = dx*dx + dy*dy;
+      if (d2 < 19600) { var d = Math.sqrt(d2) || 1, f = (140 - d) / 140 * .9; p.vx += dx / d * f; p.vy += dy / d * f; }
+      p.x += p.vx / cv.width * 16; p.y += p.vy / cv.height * 16;
+      if (p.y < -.02) { p.y = 1.02; p.x = Math.random(); p.vx = 0; p.vy = 0; }
+      if (p.x < -.02) p.x = 1.02; if (p.x > 1.02) p.x = -.02;
       var x = (p.x + Math.sin(t / 2400 + p.ph) * .012) * cv.width, y = p.y * cv.height;
       ctx.beginPath(); ctx.arc(x, y, p.r, 0, 6.283);
       ctx.fillStyle = 'rgba(242,185,13,' + (p.o * (0.6 + 0.4 * Math.sin(t / 900 + p.ph))) + ')'; ctx.fill();
@@ -653,6 +674,43 @@ loadUcapan();
     if (c === ' ') { parent.appendChild(document.createTextNode('\u00A0')); return; }
     var s = document.createElement('span'); s.className = 'ch'; s.textContent = c; parent.appendChild(s);
   }
+})();
+
+/* ===== BACKGROUND KARO: strip tenun, mandala, perkampungan ===== */
+(function(){
+  /* simbol rumah Siwaluh Jabu */
+  document.querySelector('body > svg').insertAdjacentHTML('beforeend',
+    '<symbol id="jb" viewBox="0 0 120 100">'
+    + '<rect x="28" y="58" width="64" height="42" fill="#060608"/>'
+    + '<path d="M18 60 L60 14 L102 60 L90 66 L30 66 Z" fill="#0a0a0e" stroke="#f2b90d" stroke-width="2"/>'
+    + '<path d="M18 60 Q6 56 4 42 Q14 52 28 54 Z" fill="#f2b90d"/>'
+    + '<path d="M102 60 Q114 56 116 42 Q106 52 92 54 Z" fill="#f2b90d"/>'
+    + '<rect x="57.5" y="4" width="5" height="14" fill="#f2b90d"/>'
+    + '<rect class="win" x="44" y="70" width="12" height="14" fill="#f2b90d"/>'
+    + '<rect class="win" x="64" y="70" width="12" height="14" fill="#f2b90d" style="animation-delay:-1.4s"/>'
+    + '</symbol>');
+  /* strip tenun di antara seksi */
+  var secs = document.querySelectorAll('main > section'), i;
+  for (i = 0; i < secs.length; i++) {
+    if (i === 0) continue;
+    var d = document.createElement('div');
+    d.className = 'uis-strip'; d.setAttribute('aria-hidden', 'true');
+    secs[i].parentNode.insertBefore(d, secs[i]);
+  }
+  /* mandala wajik berputar di tiap seksi */
+  var MANDALA = '<svg class="mandala" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="#f2b90d" stroke-width="2"><rect x="55" y="55" width="90" height="90" transform="rotate(45 100 100)"/><rect x="68" y="68" width="64" height="64" transform="rotate(45 100 100)"/><rect x="40" y="40" width="120" height="120"/><circle cx="100" cy="100" r="34"/><g fill="#e11d2e" stroke="none"><circle cx="100" cy="100" r="7"/><circle cx="100" cy="40" r="4"/><circle cx="100" cy="160" r="4"/><circle cx="40" cy="100" r="4"/><circle cx="160" cy="100" r="4"/></g></g></svg>';
+  document.querySelectorAll('main > section.sec, main > section.interlude').forEach(function(s){
+    s.insertAdjacentHTML('afterbegin', MANDALA);
+  });
+  /* perkampungan Siwaluh Jabu di penutup */
+  var pen = document.getElementById('penutup');
+  if (pen) pen.insertAdjacentHTML('beforeend',
+    '<svg class="village" viewBox="0 0 600 130" preserveAspectRatio="xMidYMax slice" aria-hidden="true">'
+    + '<use href="#jb" transform="translate(5,28)"/>'
+    + '<use href="#jb" transform="translate(150,12) scale(1.15)"/>'
+    + '<use href="#jb" transform="translate(315,32) scale(.92)"/>'
+    + '<use href="#jb" transform="translate(455,18) scale(1.05)"/>'
+    + '</svg>');
 })();
 </script>
 </body>

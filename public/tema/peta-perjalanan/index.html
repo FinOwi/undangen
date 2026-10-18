@@ -184,20 +184,36 @@ g+=poly([Lx+1,Ly-fh+24,-2,-fh+24,-2,-fh+31,Lx+1,Ly-fh+31],shf(hu,30));
 g+=poly([Lx+1,Ly-fh+31,-2,-fh+31,-2,-fh+33,Lx+1,Ly-fh+33],'fill:#f8f9fa;opacity:.85');
 var t=(-fh-Math.max(w,d)-2).toFixed(1),hh=(fh+Math.max(w,d)+7).toFixed(1),ww=(w+d+8).toFixed(1);
 return '<svg width="'+ww+'" height="'+hh+'" viewBox="'+(-w-4)+' '+t+' '+ww+' '+hh+'">'+g+'</svg>'}
-var GX=180,GY=150;function rnd(n){return((n*9301+49297)%233280)/233280}
+/* masjid: kubah + menara */
+function mosque(s){var wh=s*1.15,g='',hu=45;
+g+='<ellipse cx="0" cy="'+(-s/2)+'" rx="'+(s*1.15)+'" ry="'+(s*0.46)+'" fill="#000" opacity=".13"/>';
+g+=poly([-s,-s/2,0,0,0,-wh,-s,-s/2-wh],shf(hu,70));
+g+=poly([0,0,s,-s/2,s,-s/2-wh,0,-wh],shf(hu,58));
+g+=poly([-s,-s/2-wh,0,-wh,s,-s/2-wh,0,-s-wh],shf(hu,78));
+var cy=-s/2-wh,r=s*0.52;
+g+='<path d="M'+(-r)+' '+cy+' A '+r+' '+(r*1.15)+' 0 0 1 '+r+' '+cy+' Z" style="'+shf(160,42)+'"/>';
+g+='<rect x="-0.8" y="'+(cy-r*1.15-7)+'" width="1.6" height="7" style="'+shf(hu,30)+'"/>';
+g+='<circle cx="0" cy="'+(cy-r*1.15-8)+'" r="2" style="'+shf(45,70)+'"/>';
+var mx=s*0.78,my=-s*0.62,mh=s*2.4;
+g+='<rect x="'+(mx-2.6)+'" y="'+(my-mh)+'" width="5.2" height="'+mh+'" style="'+shf(hu,60)+'"/>';
+g+='<path d="M'+(mx-3.4)+' '+(my-mh)+' L '+mx+' '+(my-mh-5)+' L '+(mx+3.4)+' '+(my-mh)+' Z" style="'+shf(160,42)+'"/>';
+var t=(cy-r*1.15-11).toFixed(1),hh=(-t+s*0.3).toFixed(1),ww=(s*2.6).toFixed(1);
+return '<svg width="'+ww+'" height="'+hh+'" viewBox="'+(-s*1.3).toFixed(1)+' '+t+' '+ww+' '+hh+'">'+g+'</svg>'}
+var GX=140,GY=120;function rnd(n){return((n*9301+49297)%233280)/233280}
 function drawCity(){var c=$('#city'),cr=c.getBoundingClientRect(),m=main.getBoundingClientRect(),W=cr.width,H=cr.height,ox=m.left-cr.left,oy=m.top-cr.top,LL=rp.getTotalLength(),S=[],k=W<420?.8:1,rx=function(v){return W*(.5+.36*Math.sin(v/1100+1))};
 for(var l=0;l<=LL;l+=24){var q=rp.getPointAtLength(l);S.push([q.x+ox,q.y+oy])}
 var rd='M'+rx(-60)+' -60';for(var v=-20;v<=H+60;v+=40)rd+=' L'+rx(v)+' '+v;
-var cols=Math.ceil(W/GX)+1,rows=Math.ceil(H/GY)+1,pk=Math.min(.5,Math.max(.06,1-1400/(cols*rows*4))),base='',B=[];
-for(var r=0;r<rows;r++)for(var cc=0;cc<cols;cc++){var bx=cc*GX+7,by=r*GY+7,park=(cc*5+r*3)%11===0;
+var cols=Math.ceil(W/GX)+1,rows=Math.ceil(H/GY)+1,pk=Math.min(.3,Math.max(.02,1-2000/(cols*rows*4))),base='',B=[];
+for(var r=0;r<rows;r++)for(var cc=0;cc<cols;cc++){var bx=cc*GX+7,by=r*GY+7,park=(cc*5+r*3)%16===0;
 if(park)base+='<rect x="'+(bx+8)+'" y="'+(by+8)+'" width="'+(GX-23)+'" height="'+(GY-23)+'" rx="10" fill="var(--park)"/>';
 for(var sy=0;sy<2;sy++)for(var sx=0;sx<2;sx++){var n=r*131+cc*17+sy*5+sx+1,x=bx+(sx?.74:.26)*(GX-7),y2=by+(sy?.98:.52)*(GY-7);
-if(y2>H-8||x>W+20||Math.abs(x-rx(y2))<60||rnd(n)<pk)continue;
+if(y2>H-8||x>W+20||Math.abs(x-rx(y2))<42||rnd(n)<pk)continue;
 var bad=0;for(var i=0;i<S.length;i++){var dx=S[i][0]-x,dy=S[i][1]-y2;if(dx*dx+dy*dy<2500){bad=1;break}}if(bad)continue;
 var pick=rnd(n+5),hue=HU[Math.floor(rnd(n+4)*5)],bs='';
-if(pick<.36)bs=house((13+rnd(n+6)*7)*k,28+Math.floor(rnd(n+7)*20));
-else if(pick<.66)bs=ruko((14+rnd(n+6)*6)*k,(12+rnd(n+8)*5)*k,(30+rnd(n+9)*18)*k,hue,['#e8590c','#0b6f62','#c2255c','#1971c2'][Math.floor(rnd(n+10)*4)]);
-else if(pick<.84){var bw=(16+Math.floor(rnd(n+1)*3)*4)*k,bh=(rnd(n+11)>.88?(110+rnd(n+2)*70):(42+rnd(n+2)*58))*k;bs=bld(bw,bw,bh,hue)}
+if(pick<.34)bs=house((13+rnd(n+6)*7)*k,28+Math.floor(rnd(n+7)*20));
+else if(pick<.62)bs=ruko((14+rnd(n+6)*6)*k,(12+rnd(n+8)*5)*k,(30+rnd(n+9)*18)*k,hue,['#e8590c','#0b6f62','#c2255c','#1971c2'][Math.floor(rnd(n+10)*4)]);
+else if(pick<.78){var bw=(16+Math.floor(rnd(n+1)*3)*4)*k,bh=(rnd(n+11)>.88?(110+rnd(n+2)*70):(42+rnd(n+2)*58))*k;bs=bld(bw,bw,bh,hue)}
+else if(pick<.82)bs=mosque((13+rnd(n+12)*3)*k);
 else bs='<svg width="30" height="34" viewBox="-14 -26 28 34">'+OR[0]()+'</svg>';
 B.push({x:x,y:y2,s:bs});}}
 B.sort(function(a,b){return a.y-b.y||a.x-b.x});

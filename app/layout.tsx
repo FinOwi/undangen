@@ -20,7 +20,7 @@ const sans = Jost({
 export const metadata: Metadata = {
   title: "Undangen — Undangan Digital Premium",
   description:
-    "Undangen (“undangan” dalam bahasa Karo): undangan digital premium untuk pernikahan, aqiqah, khitanan, ulang tahun, wisuda, dan acara korporat. 24 tema eksklusif, aktif selamanya, dibuatkan dulu bayar setelah cocok.",
+    "Undangen (“undangan” dalam bahasa Karo): undangan digital premium untuk pernikahan, aqiqah, khitanan, ulang tahun, wisuda, dan acara korporat. tema eksklusif, aktif selamanya, dibuatkan dulu bayar setelah cocok.",
 }
 
 export default function RootLayout({

@@ -24,7 +24,7 @@ export function Hero() {
             <Button
               size="lg"
               className="bg-gold-500 px-7 font-semibold text-ink-950 hover:bg-gold-400"
-              render={<a href="#tema">Jelajahi 24 Tema</a>}
+              render={<a href="#tema">Jelajahi Tema</a>}
             />
             <a
               href={WA_LINK}

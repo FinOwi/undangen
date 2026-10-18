@@ -50,6 +50,14 @@ export const THEMES: Theme[] = [
     artText: "text-amber-100",
     badge: "Baru",
   },
+  {
+    slug: "pendakian-cinta",
+    name: "Pendakian Cinta",
+    tagline: "Game 2D: daki gunung, kumpulkan edelweis, rayakan di puncak",
+    art: "from-indigo-950 via-purple-900 to-orange-400",
+    artText: "text-amber-100",
+    badge: "Baru",
+  },
 ]
 
 export const WA_NUMBER = "6288279406268"

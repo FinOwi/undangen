@@ -42,6 +42,14 @@ export const THEMES: Theme[] = [
     artText: "text-rose-950",
     badge: "Baru",
   },
+  {
+    slug: "lakon-cinta",
+    name: "Lakon Cinta",
+    tagline: "Wayang interaktif: dalang memandu 3 babak lakon",
+    art: "from-blue-950 via-indigo-950 to-amber-900",
+    artText: "text-amber-100",
+    badge: "Baru",
+  },
 ]
 
 export const WA_NUMBER = "6288279406268"

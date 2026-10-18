@@ -12,13 +12,14 @@
     --color-gold-50: oklch(0.97 0.03 95);
     --color-gold-100: oklch(0.93 0.06 95);
     --color-gold-200: oklch(0.88 0.09 92);
-    --color-gold-300: oklch(0.83 0.12 90);
-    --color-gold-400: oklch(0.78 0.14 87);
-    --color-gold-500: oklch(0.72 0.15 84);
-    --color-gold-600: oklch(0.64 0.14 82);
-    --color-gold-700: oklch(0.55 0.12 80);
-    --color-gold-800: oklch(0.45 0.10 78);
-    --color-gold-900: oklch(0.36 0.08 76);
+    --color-gold-300: oklch(0.80 0.12 88);
+    --color-gold-400: oklch(0.72 0.13 85);
+    /* Aksen utama: ochre tanah (#A16207) — dalam & hangat, bukan emas AI yang menyilaukan */
+    --color-gold-500: oklch(0.62 0.12 83);
+    --color-gold-600: oklch(0.52 0.11 82);
+    --color-gold-700: oklch(0.44 0.10 80);
+    --color-gold-800: oklch(0.37 0.09 78);
+    --color-gold-900: oklch(0.30 0.07 76);
 
     --color-ink-950: oklch(0.16 0.015 70);
     --color-ink-900: oklch(0.20 0.018 70);

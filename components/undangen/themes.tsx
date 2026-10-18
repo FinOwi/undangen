@@ -15,7 +15,7 @@ export function Themes() {
                 Koleksi Tema
               </p>
               <h2 className="mt-5 font-display text-[clamp(2.4rem,5.5vw,4rem)] leading-[1.02] font-bold tracking-tight text-balance text-cream-50">
-                Dua puluh empat <span className="text-gold-gradient italic">dunia.</span>
+                Dua puluh tiga <span className="text-gold-gradient italic">dunia.</span>
               </h2>
             </Reveal>
           </div>

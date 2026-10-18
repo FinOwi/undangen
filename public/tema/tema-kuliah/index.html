@@ -352,6 +352,7 @@ function setMusic(v){ on = v; if (v) bgm.play().catch(function(){}); else bgm.pa
 document.body.style.overflow = 'hidden';
 document.getElementById('openBtn').addEventListener('click', function(){
   gate.classList.add('open'); document.body.style.overflow = '';
+  if (window.__startAch) window.__startAch();
   setTimeout(function(){ gate.style.display = 'none'; }, 1200);
   mBtn.classList.add('show'); setMusic(true);
   document.getElementById('quote').scrollIntoView();
@@ -509,14 +510,18 @@ if (!reduceMotion) {
     hudCount.textContent = Object.keys(fired).length;
     unlock(name);
   }
+  var gateOpen = false;
   var io2 = new IntersectionObserver(function(es){
     es.forEach(function(e){ if (e.isIntersecting) fire(e.target.id, e.target.dataset.ach); });
   }, {threshold:.35});
-  ACH.forEach(function(a){
-    if (a[0] === 'rsvp-submit') return;
-    var sec = document.getElementById(a[0]); if (!sec) return;
-    sec.dataset.ach = a[1]; io2.observe(sec);
-  });
+  function startAch(){
+    if (gateOpen) return; gateOpen = true;
+    ACH.forEach(function(a){
+      if (a[0] === 'rsvp-submit') return;
+      var sec = document.getElementById(a[0]); if (!sec) return;
+      sec.dataset.ach = a[1]; io2.observe(sec);
+    });
+  }
   var ticking = false;
   addEventListener('scroll', function(){
     if (!ticking){ ticking = true; requestAnimationFrame(function(){ movePlane(); ticking = false; }); }
@@ -524,6 +529,7 @@ if (!reduceMotion) {
   addEventListener('resize', function(){ buildNodes(); movePlane(); });
   addEventListener('load', function(){ buildNodes(); movePlane(); });
   buildNodes(); movePlane();
+  window.__startAch = startAch;
   var f0 = document.getElementById('rsvpForm');
   if (f0) f0.addEventListener('submit', function(){ setTimeout(function(){ fire('rsvp-submit', 'Doa Terkirim'); }, 400); });
   var imgs = Array.prototype.slice.call(document.querySelectorAll('#galGrid img')),

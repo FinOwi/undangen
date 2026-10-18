@@ -34,6 +34,14 @@ export const THEMES: Theme[] = [
     artText: "text-amber-100",
     badge: "Baru",
   },
+  {
+    slug: "baroque-rose",
+    name: "Baroque Rose",
+    tagline: "Undangan elegan: bingkai barok, ornamen emas & bunga",
+    art: "from-rose-100 via-amber-100 to-rose-200",
+    artText: "text-rose-950",
+    badge: "Baru",
+  },
 ]
 
 export const WA_NUMBER = "6288279406268"

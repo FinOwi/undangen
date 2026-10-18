@@ -413,24 +413,29 @@ if (!reduceMotion) {
     var el = document.getElementById(id === 'rsvp-submit' ? 'rsvp' : id);
     if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
   }
-  // node di jalan besar
+  // node di jalan besar (counter-scale: SVG di-stretch vertikal, node harus tetap bulat)
   function buildNodes(){
     var L = path.getTotalLength(), H = docH(), vh = innerHeight;
     nodeG.innerHTML = '';
+    if (!L) return;
+    var sr = svg.getBoundingClientRect();
+    var xs = sr.width / 520, ys = sr.height / 100;
     ACH.forEach(function(a){
       var f;
       if (a[0] === 'rsvp-submit') { f = 0.995; }
       else {
-        var sec = document.getElementById(a[0]); if (!sec || !L) return;
+        var sec = document.getElementById(a[0]); if (!sec) return;
         f = (sec.getBoundingClientRect().top + scrollY + sec.offsetHeight/2 - vh/2) / H;
         f = Math.min(.985, Math.max(.015, f));
       }
       var q = path.getPointAtLength(f * L);
+      var g = document.createElementNS(NS, 'g');
+      g.setAttribute('transform', 'translate(' + q.x.toFixed(1) + ',' + q.y.toFixed(1) + ') scale(' + (1/xs).toFixed(4) + ',' + (1/ys).toFixed(4) + ')');
       var c = document.createElementNS(NS, 'circle');
-      c.setAttribute('cx', q.x.toFixed(1)); c.setAttribute('cy', q.y.toFixed(1));
       c.setAttribute('r', 13); c.setAttribute('class', 'node' + (fired[a[0]] ? ' on' : ''));
       c.dataset.stop = a[0];
-      nodeG.appendChild(c);
+      g.appendChild(c);
+      nodeG.appendChild(g);
     });
   }
   // pesawat mengikuti jalan

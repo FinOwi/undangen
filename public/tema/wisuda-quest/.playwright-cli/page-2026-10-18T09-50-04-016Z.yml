@@ -1,0 +1,14 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - text: 🎓 LEVEL 0/8
+    - generic [ref=e4]: Lewati 8 semester menuju toga
+  - generic [ref=e6]:
+    - button "🎵" [ref=e7] [cursor=pointer]
+    - button "❓" [ref=e8] [cursor=pointer]
+  - generic [ref=e9]:
+    - generic [ref=e10]: WISUDAQUEST
+    - generic [ref=e11]: UNDANGAN SIDANG · RPG
+    - generic [ref=e12]: Raka Pratama
+    - generic [ref=e13]: Teknik Informatika · Universitas Sumatera Utara
+    - button "▶ MULAI" [ref=e14] [cursor=pointer]
+    - generic [ref=e15]: 🖱️ Klik / ketuk tanah untuk berjalan⌨️ WASD / panah • 📱 D-pad + tombol ADekati gedung & tekan A — tiap gedung = 1 semester!

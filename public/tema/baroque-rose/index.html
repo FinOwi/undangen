@@ -104,10 +104,10 @@ section{padding:80px 22px;position:relative;max-width:640px;margin:0 auto;text-a
 .person h3{font-family:'Cormorant Garamond',serif;font-size:28px;margin:20px 0 4px;font-weight:600}
 .person p{color:var(--muted);font-size:13px;font-weight:300;line-height:1.6}
 /* celebrate : pearl arch */
-.arch{position:relative;width:min(320px,80vw);margin:6px auto 0}
-.arch svg{width:100%;display:block}
-.arch-ph{position:absolute;top:34px;left:34px;right:34px;bottom:14px;overflow:hidden;
-  border-radius:130px 130px 14px 14px;background:linear-gradient(160deg,#f7e9d3,#eed3b4);
+.arch{position:relative;width:min(320px,80vw);margin:6px auto 0;aspect-ratio:300/420}
+.arch svg{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.arch-ph{position:absolute;top:36px;left:36px;right:36px;bottom:14px;z-index:1;overflow:hidden;
+  border-radius:120px 120px 14px 14px;background:linear-gradient(160deg,#f7e9d3,#eed3b4);
   display:flex;align-items:center;justify-content:center}
 .arch-ph img{width:100%;height:100%;object-fit:cover}
 .arch-ph .mono{font-family:'Cormorant Garamond',serif;font-size:56px;color:var(--rosegold);opacity:.8;text-align:center;line-height:1.2}

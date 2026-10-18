@@ -286,6 +286,17 @@ footer .mono{display:inline-flex;width:54px;height:54px;background:var(--gold);c
   </footer>
 </div>
 
+
+<div id="achToast" role="status"><div class="t">🏆 PENCAPAIAN TERBUKA</div><div class="n" id="achName"></div></div>
+<div id="lightbox" role="dialog" aria-label="Foto">
+  <button class="lb-btn" id="lbClose" aria-label="Tutup">✕</button>
+  <div class="lt">📷 FOTO DITEMUKAN</div>
+  <img id="lbImg" src="" alt="Foto galeri">
+  <div class="ln" id="lbName"></div>
+  <div class="lc" id="lbCount"></div>
+  <div class="lb-row"><button class="lb-btn" id="lbPrev" aria-label="Sebelumnya">‹</button><button class="lb-btn" id="lbNext" aria-label="Berikutnya">›</button></div>
+</div>
+
 <script>
 // tamu
 var to = new URLSearchParams(location.search).get('to');
@@ -441,15 +452,5 @@ if (!reduceMotion) {
 var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }); }, {threshold:.12});
 document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
 </script>
-
-<div id="achToast" role="status"><div class="t">🏆 PENCAPAIAN TERBUKA</div><div class="n" id="achName"></div></div>
-<div id="lightbox" role="dialog" aria-label="Foto">
-  <button class="lb-btn" id="lbClose" aria-label="Tutup">✕</button>
-  <div class="lt">📷 FOTO DITEMUKAN</div>
-  <img id="lbImg" src="" alt="Foto galeri">
-  <div class="ln" id="lbName"></div>
-  <div class="lc" id="lbCount"></div>
-  <div class="lb-row"><button class="lb-btn" id="lbPrev" aria-label="Sebelumnya">‹</button><button class="lb-btn" id="lbNext" aria-label="Berikutnya">›</button></div>
-</div>
 </body>
 </html>

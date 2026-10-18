@@ -22,14 +22,11 @@ h2{font-size:clamp(2.2rem,9vw,3rem);line-height:1.05;font-weight:700;margin-bott
 h2 em{font-style:italic;font-weight:500;color:var(--gold)}
 .lead{color:var(--cream-dim);max-w:44ch}
 .tenun{height:12px;background:linear-gradient(to bottom,#b8862f 0 2px,#14100c 2px 6px,#f1e8d6 6px 8px,#14100c 8px 10px,#b8862f 10px 12px)}
-/* --- ambient sinematik ala HyperFrame: background hidup --- */
-section{overflow:hidden}
-section>*{position:relative;z-index:1}
-.ambient{position:absolute;inset:0;overflow:hidden;z-index:0}
-.ambient img{position:absolute;inset:-8%;width:116%;height:116%;object-fit:cover;opacity:.24;animation:kb2 38s ease-in-out infinite alternate;will-change:transform}
-@keyframes kb2{from{transform:scale(1) translateY(0)}to{transform:scale(1.15) translateY(-2%)}}
-.ambient::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,var(--ink) 0%,transparent 24%,transparent 76%,var(--ink) 100%)}
-#dust{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.5}
+/* --- background video HyperFrame: perjalanan kuliah di belakang undangan --- */
+#journeyBg{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+#bgShade{position:fixed;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(10,8,5,.78),rgba(10,8,5,.6) 30%,rgba(10,8,5,.62) 70%,rgba(10,8,5,.8));pointer-events:none}
+.wrap{position:relative;z-index:2}
+#dust{position:fixed;inset:0;z-index:61;pointer-events:none;opacity:.5}
 .demo-tag{position:fixed;top:14px;right:14px;z-index:80;background:rgba(20,16,12,.78);color:var(--gold);border:1px solid var(--gold-deep);font-size:11px;letter-spacing:.24em;padding:8px 14px;border-radius:999px;backdrop-filter:blur(6px)}
 /* gerbang */
 #gate{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;justify-content:flex-end;background:var(--ink);transition:transform 1.1s cubic-bezier(.7,0,.2,1),visibility 0s 1.1s}
@@ -99,11 +96,13 @@ footer{padding:60px 28px 90px;text-align:center;color:var(--cream-dim)}
 footer .mono{display:inline-flex;width:54px;height:54px;background:var(--gold);color:var(--ink);align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-weight:800;font-size:26px;margin-bottom:18px}
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
 .rv.on{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}#gate .bg{animation:none}.ambient img{animation:none}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}#gate .bg{animation:none}}
 </style>
 </head>
 <body>
 <div class="demo-tag">DEMO</div>
+<video id="journeyBg" muted loop playsinline preload="auto" src="/tema/tema-kuliah/assets/bg-journey.mp4"></video>
+<div id="bgShade" aria-hidden="true"></div>
 <canvas id="dust" aria-hidden="true"></canvas>
 <audio id="bgm" loop preload="auto" src="/tema/tema-kuliah/assets/bgm.m4a"></audio>
 <button id="musicBtn" aria-label="musik"><span class="d">♪</span></button>
@@ -128,7 +127,6 @@ footer .mono{display:inline-flex;width:54px;height:54px;background:var(--gold);c
   <div class="tenun"></div>
 
   <section id="wisudawan">
-    <div class="ambient"><img src="/tema/tema-kuliah/assets/babak2-begadang.webp" alt="" loading="lazy"></div>
     <p class="eyebrow rv">Wisudawan</p>
     <h2 class="rv">Dengan bangga <em>memperkenalkan.</em></h2>
     <div class="grad rv">
@@ -156,7 +154,6 @@ footer .mono{display:inline-flex;width:54px;height:54px;background:var(--gold);c
   <div class="tenun"></div>
 
   <section id="acara">
-    <div class="ambient"><img src="/tema/tema-kuliah/assets/babak1-gerbang.webp" alt="" loading="lazy"></div>
     <p class="eyebrow rv">Waktu &amp; Tempat</p>
     <h2 class="rv">Upacara <em>wisuda.</em></h2>
     <div class="card rv">
@@ -212,7 +209,6 @@ footer .mono{display:inline-flex;width:54px;height:54px;background:var(--gold);c
   <div class="tenun"></div>
 
   <section id="gift" style="text-align:center">
-    <div class="ambient"><img src="/tema/tema-kuliah/assets/babak4-cta.webp" alt="" loading="lazy"></div>
     <p class="eyebrow rv">Tanda Kasih</p>
     <h2 class="rv">Kirim <em>hadiah.</em></h2>
     <div class="rek rv">
@@ -225,7 +221,6 @@ footer .mono{display:inline-flex;width:54px;height:54px;background:var(--gold);c
   <div class="tenun"></div>
 
   <section id="rsvp">
-    <div class="ambient"><img src="/tema/tema-kuliah/assets/babak3-toga.webp" alt="" loading="lazy"></div>
     <p class="eyebrow rv">Konfirmasi</p>
     <h2 class="rv">RSVP &amp; <em>ucapan.</em></h2>
     <form class="rsvp rv" id="rsvpForm">
@@ -263,6 +258,7 @@ function setMusic(v){ on = v; if (v) bgm.play().catch(function(){}); else bgm.pa
 document.body.style.overflow = 'hidden';
 document.getElementById('openBtn').addEventListener('click', function(){
   gate.classList.add('open'); document.body.style.overflow = '';
+  var jv = document.getElementById('journeyBg'); jv.play().catch(function(){});
   setTimeout(function(){ gate.style.display = 'none'; }, 1200);
   mBtn.classList.add('show'); setMusic(true);
   document.getElementById('quote').scrollIntoView();
@@ -314,19 +310,6 @@ if (!reduceMotion) {
     cx.globalAlpha = 1;
     requestAnimationFrame(loop);
   })(0);
-  // parallax: background bergeser pelan mengikuti scroll
-  var ambImgs = document.querySelectorAll('.ambient img');
-  (function par(){
-    var vh = innerHeight;
-    for (var k = 0; k < ambImgs.length; k++){
-      var r = ambImgs[k].closest('section').getBoundingClientRect();
-      if (r.bottom > 0 && r.top < vh) {
-        var prog = (r.top + r.height/2 - vh/2) / vh;
-        ambImgs[k].style.translate = '0 ' + (-prog*46).toFixed(1) + 'px';
-      }
-    }
-    requestAnimationFrame(par);
-  })();
 }
 // reveal
 var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }); }, {threshold:.12});

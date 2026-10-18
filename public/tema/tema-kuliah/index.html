@@ -147,12 +147,12 @@ footer .mono{display:inline-flex;width:54px;height:54px;background:var(--gold);c
 
 <div class="wrap">
 <svg id="roadmap" viewBox="0 0 520 100" preserveAspectRatio="none" aria-hidden="true">
-  <path id="roadPath" d="M 260 0 C 120 10, 400 18, 260 28 C 120 38, 400 46, 260 56 C 120 66, 400 74, 260 84 C 180 92, 340 96, 260 100" fill="none" stroke="#050403" stroke-width="46" opacity="1" vector-effect="non-scaling-stroke" />
-  <path d="M 260 0 C 120 10, 400 18, 260 28 C 120 38, 400 46, 260 56 C 120 66, 400 74, 260 84 C 180 92, 340 96, 260 100" fill="none" stroke="#b8862f" stroke-width="38" opacity=".14" vector-effect="non-scaling-stroke" />
-  <path d="M 260 0 C 120 10, 400 18, 260 28 C 120 38, 400 46, 260 56 C 120 66, 400 74, 260 84 C 180 92, 340 96, 260 100" fill="none" stroke="#171209" stroke-width="38" opacity="1" vector-effect="non-scaling-stroke" />
-  <path d="M 260 0 C 120 10, 400 18, 260 28 C 120 38, 400 46, 260 56 C 120 66, 400 74, 260 84 C 180 92, 340 96, 260 100" fill="none" stroke="#e8b95a" stroke-width="3.5" opacity=".85" vector-effect="non-scaling-stroke" stroke-dasharray="18 16"/>
+  <path id="roadPath" d="M 260 0 C 60 7, 460 13, 260 20 C 60 27, 460 33, 260 40 C 60 47, 460 53, 260 60 C 60 67, 460 73, 260 80 C 60 87, 460 93, 260 100" fill="none" stroke="#050403" stroke-width="46" opacity="1" vector-effect="non-scaling-stroke" />
+  <path d="M 260 0 C 60 7, 460 13, 260 20 C 60 27, 460 33, 260 40 C 60 47, 460 53, 260 60 C 60 67, 460 73, 260 80 C 60 87, 460 93, 260 100" fill="none" stroke="#b8862f" stroke-width="38" opacity=".1" vector-effect="non-scaling-stroke" />
+  <path d="M 260 0 C 60 7, 460 13, 260 20 C 60 27, 460 33, 260 40 C 60 47, 460 53, 260 60 C 60 67, 460 73, 260 80 C 60 87, 460 93, 260 100" fill="none" stroke="#171209" stroke-width="38" opacity=".85" vector-effect="non-scaling-stroke" />
+  <path d="M 260 0 C 60 7, 460 13, 260 20 C 60 27, 460 33, 260 40 C 60 47, 460 53, 260 60 C 60 67, 460 73, 260 80 C 60 87, 460 93, 260 100" fill="none" stroke="#e8b95a" stroke-width="3.5" opacity=".4" vector-effect="non-scaling-stroke" stroke-dasharray="18 16"/>
   <g id="nodes"></g>
-  <g id="traveler"><circle class="trav-ring" r="13" fill="none" stroke="#e8b95a" stroke-width="2.5"/><circle r="7" fill="#e8b95a" stroke="#14100c" stroke-width="2.5"/></g>
+  <g id="traveler"><circle class="trav-ring" r="13" fill="none" stroke="#e8b95a" stroke-width="2.5"/><circle r="9" fill="#e8b95a" stroke="#14100c" stroke-width="2.5"/></g>
 </svg>
   <section id="quote" style="text-align:center">
     <p class="eyebrow rv">Kutipan</p>
@@ -385,7 +385,7 @@ if (!reduceMotion) {
       var q = path.getPointAtLength(f * L);
       var c = document.createElementNS(NS, 'circle');
       c.setAttribute('cx', q.x.toFixed(1)); c.setAttribute('cy', q.y.toFixed(1));
-      c.setAttribute('r', 11); c.setAttribute('class', 'node' + (fired[s[0]] ? ' on' : ''));
+      c.setAttribute('r', 13); c.setAttribute('class', 'node' + (fired[s[0]] ? ' on' : ''));
       c.dataset.stop = s[0];
       nodeG.appendChild(c);
     });

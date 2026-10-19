@@ -58,6 +58,14 @@ export const THEMES: Theme[] = [
     artText: "text-amber-100",
     badge: "Baru",
   },
+  {
+    slug: "sinematik-nusantara",
+    name: "Sinematik Nusantara",
+    tagline: "Demo sinematik: sehari di Tanah Karo, 4 bab ambient",
+    art: "from-stone-950 via-emerald-950 to-amber-900",
+    artText: "text-amber-100",
+    badge: "Demo",
+  },
 ]
 
 export const WA_NUMBER = "6288279406268"

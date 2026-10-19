@@ -37,7 +37,7 @@ export function Hero() {
           </div>
           <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-cream-50/10 pt-7">
             {[
-              { value: "24", label: "Tema eksklusif" },
+              { value: "7", label: "Tema eksklusif" },
               { value: "∞", label: "Aktif selamanya" },
               { value: "Rp0", label: "Di muka*" },
             ].map((s) => (

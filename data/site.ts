@@ -59,6 +59,22 @@ export const THEMES: Theme[] = [
     badge: "Baru",
   },
   {
+    slug: "siwaluh-jabu",
+    name: "Siwaluh Jabu",
+    tagline: "Karo: rumah adat bertanduk, tenun uis & jambur",
+    art: "from-red-950 via-stone-900 to-amber-200",
+    artText: "text-amber-100",
+    badge: "Baru",
+  },
+  {
+    slug: "rumah-bolon",
+    name: "Rumah Bolon",
+    tagline: "Batak Toba: atap pelana menjulang & ukiran gorga",
+    art: "from-stone-950 via-red-950 to-amber-100",
+    artText: "text-red-100",
+    badge: "Baru",
+  },
+  {
     slug: "pendopo-biru",
     name: "Pendopo Biru",
     tagline: "Elegan Jawa biru: gerbang pendopo, kawung & bunga biru",

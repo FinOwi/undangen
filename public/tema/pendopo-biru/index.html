@@ -18,10 +18,10 @@ html{scroll-behavior:smooth}
 body{font-family:'Jost',sans-serif;color:var(--ink);background:
   linear-gradient(180deg,var(--bg) 0%,var(--bg2) 55%,var(--bg) 100%);
   min-height:100vh;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.5;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%231e4f8f' stroke-opacity='0.07'%3E%3Cellipse cx='36' cy='19' rx='13' ry='17'/%3E%3Cellipse cx='36' cy='53' rx='13' ry='17'/%3E%3Cellipse cx='19' cy='36' rx='17' ry='13'/%3E%3Cellipse cx='53' cy='36' rx='17' ry='13'/%3E%3Ccircle cx='36' cy='36' r='3'/%3E%3C/g%3E%3C/svg%3E")}
 .serif{font-family:'Cormorant Garamond',serif}
-main{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:0 18px 40px}
+main{max-width:560px;margin:0 auto;padding:0 18px 40px}
 section{padding:44px 0 8px;text-align:center;position:relative}
 .kick{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:600}
 h2.sec{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:var(--blue);margin:8px 0 6px}
@@ -110,7 +110,7 @@ h2.sec{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;col
 .giftrow .t b{color:var(--blue)}
 .copier{border:1.5px solid rgba(185,138,30,.55);background:rgba(217,182,74,.14);color:var(--gold);border-radius:10px;padding:8px 14px;font-size:12.5px;font-weight:600;cursor:pointer;flex-shrink:0;font-family:'Jost',sans-serif}
 /* ---------- footer ---------- */
-footer{text-align:center;padding:56px 18px 30px;position:relative;z-index:1}
+footer{text-align:center;padding:56px 18px 30px}
 footer .gun{width:110px;margin:0 auto 10px;display:block;mix-blend-mode:multiply}
 footer p{font-size:13px;color:var(--mut);line-height:1.8}
 footer .fn{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blue);font-weight:600;margin-top:6px}
@@ -147,7 +147,7 @@ footer .fn{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blu
   <section id="heroSec">
     <img class="gun-sm rv" src="/tema/pendopo-biru/assets/gunungan.jpg" alt="">
     <p class="kick rv">The Wedding Of</p>
-    <div class="hero-photo rv" id="heroPhoto"></div>
+    <div class="hero-photo" id="heroPhoto"></div>
     <h1 class="hero-names rv" id="heroNames"></h1>
     <p class="hero-date rv" id="heroDate"></p>
     <img class="swag rv" src="/tema/pendopo-biru/assets/flower-swag.jpg" alt="">

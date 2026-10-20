@@ -59,6 +59,14 @@ export const THEMES: Theme[] = [
     badge: "Baru",
   },
   {
+    slug: "pendopo-biru",
+    name: "Pendopo Biru",
+    tagline: "Elegan Jawa biru: gerbang pendopo, kawung & bunga biru",
+    art: "from-sky-100 via-blue-100 to-amber-100",
+    artText: "text-blue-950",
+    badge: "Baru",
+  },
+  {
     slug: "sinematik-nusantara",
     name: "Sinematik Nusantara",
     tagline: "Demo sinematik: sehari di Tanah Karo, 4 bab ambient",

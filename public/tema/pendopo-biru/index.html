@@ -26,7 +26,7 @@ section{padding:44px 0 8px;text-align:center;position:relative}
 .kick{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:600}
 h2.sec{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:var(--blue);margin:8px 0 6px}
 .sub{font-size:14px;color:var(--mut);line-height:1.7;max-width:420px;margin:0 auto}
-.swag{display:block;width:min(340px,84%);margin:26px auto 0;opacity:.95}
+.swag{display:block;width:min(340px,84%);margin:26px auto 0;opacity:.95;mix-blend-mode:multiply}
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
 .rv.on{opacity:1;transform:none}
 /* ---------- gerbang / cover ---------- */
@@ -37,18 +37,18 @@ h2.sec{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;col
 .door.right{right:0;border-left:2px solid rgba(185,138,30,.45)}
 .door::before{content:"";position:absolute;inset:0;opacity:.6;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%231e4f8f' stroke-opacity='0.09'%3E%3Cellipse cx='36' cy='19' rx='13' ry='17'/%3E%3Cellipse cx='36' cy='53' rx='13' ry='17'/%3E%3Cellipse cx='19' cy='36' rx='17' ry='13'/%3E%3Cellipse cx='53' cy='36' rx='17' ry='13'/%3E%3Ccircle cx='36' cy='36' r='3'/%3E%3C/g%3E%3C/svg%3E")}
-.door .pendopo{position:absolute;top:16%;width:200%;max-width:none;opacity:.96}
+.door .pendopo{position:absolute;top:13%;width:190%;max-width:none;opacity:.9;mix-blend-mode:multiply}
 .door.left .pendopo{right:-100%}
 .door.right .pendopo{left:-100%}
-.door .fc{position:absolute;width:62%;opacity:.95}
+.door .fc{position:absolute;width:62%;opacity:.95;mix-blend-mode:multiply}
 .door.left .fc{top:0;left:0}
 .door.right .fc{top:0;right:0;transform:scaleX(-1)}
 #cover.open .door.left{transform:translateX(-102%)}
 #cover.open .door.right{transform:translateX(102%)}
 #coverCard{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;padding:22px;transition:opacity .5s ease,transform .5s ease}
 #cover.open #coverCard{opacity:0;transform:scale(.94);pointer-events:none}
-.cov-in{text-align:center;max-width:420px;width:100%}
-.cov-in .pendopo-sm{width:120px;margin:0 auto 6px;display:block;filter:drop-shadow(0 6px 14px rgba(30,79,143,.18))}
+.cov-in{text-align:center;max-width:420px;width:100%;background:radial-gradient(ellipse at center,rgba(244,249,255,.88) 0%,rgba(244,249,255,.55) 55%,transparent 75%);padding:26px 18px;border-radius:30px}
+.cov-in .pendopo-sm{width:120px;margin:0 auto 6px;display:block;mix-blend-mode:multiply}
 .cov-in .kick{margin-bottom:2px}
 .cov-names{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;color:var(--blue);line-height:1.12;margin:6px 0 2px}
 .cov-date{font-size:13px;letter-spacing:3px;color:var(--gold);font-weight:600;text-transform:uppercase}
@@ -59,12 +59,12 @@ h2.sec{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;col
   box-shadow:0 10px 24px rgba(30,79,143,.35)}
 #btnOpen:active{transform:scale(.96)}
 /* ---------- hero ---------- */
-.gun-sm{width:74px;margin:0 auto 4px;display:block}
+.gun-sm{width:74px;margin:0 auto 4px;display:block;mix-blend-mode:multiply}
 .hero-photo{width:min(300px,78vw);margin:18px auto 0;position:relative}
 .hero-photo .ph{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:160px 160px 16px 16px;border:3px solid #fff;box-shadow:0 18px 40px rgba(30,79,143,.25);display:block;background:#cfe0f4}
-.hero-photo .fc{position:absolute;width:58%;z-index:2;pointer-events:none}
-.hero-photo .fc.tl{top:-34px;left:-40px}
-.hero-photo .fc.br{bottom:-30px;right:-40px;transform:scale(-1)}
+.hero-photo .fc{position:absolute;width:52%;z-index:2;pointer-events:none;mix-blend-mode:multiply}
+.hero-photo .fc.tl{top:-46px;left:-54px}
+.hero-photo .fc.br{bottom:-42px;right:-54px;transform:scale(-1)}
 .hero-names{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:600;color:var(--blue);line-height:1.1;margin-top:26px}
 .hero-amp{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:30px}
 .hero-date{margin-top:8px;font-size:13px;letter-spacing:3px;color:var(--mut);text-transform:uppercase;font-weight:500}
@@ -92,7 +92,7 @@ h2.sec{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;col
 .ggrid .gph{aspect-ratio:1;border-radius:14px;background:linear-gradient(160deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:30px;border:2px solid #fff}
 /* ---------- acara ---------- */
 .evcard{background:var(--card);border:1px solid rgba(30,79,143,.12);border-radius:20px;padding:24px 20px;max-width:440px;margin:16px auto 0;box-shadow:0 12px 30px rgba(30,79,143,.08)}
-.evcard img.pd{width:130px;margin:0 auto 8px;display:block}
+.evcard img.pd{width:130px;margin:0 auto 8px;display:block;mix-blend-mode:multiply}
 .evcard h3{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blue);font-weight:600}
 .evcard .jam{font-size:15px;font-weight:600;color:var(--gold);margin-top:6px;letter-spacing:1px}
 .evcard .tmp{font-size:13.5px;color:var(--mut);line-height:1.65;margin-top:4px}
@@ -111,7 +111,7 @@ h2.sec{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;col
 .copier{border:1.5px solid rgba(185,138,30,.55);background:rgba(217,182,74,.14);color:var(--gold);border-radius:10px;padding:8px 14px;font-size:12.5px;font-weight:600;cursor:pointer;flex-shrink:0;font-family:'Jost',sans-serif}
 /* ---------- footer ---------- */
 footer{text-align:center;padding:56px 18px 30px;position:relative;z-index:1}
-footer .gun{width:110px;margin:0 auto 10px;display:block}
+footer .gun{width:110px;margin:0 auto 10px;display:block;mix-blend-mode:multiply}
 footer p{font-size:13px;color:var(--mut);line-height:1.8}
 footer .fn{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blue);font-weight:600;margin-top:6px}
 /* ---------- misc ---------- */
@@ -130,11 +130,11 @@ footer .fn{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blu
 
 <!-- GERBANG PENDOPO -->
 <div id="cover">
-  <div class="door left"><img class="pendopo" src="/tema/pendopo-biru/assets/pendopo.png" alt=""><img class="fc" src="/tema/pendopo-biru/assets/flower-corner.png" alt=""></div>
-  <div class="door right"><img class="pendopo" src="/tema/pendopo-biru/assets/pendopo.png" alt=""><img class="fc" src="/tema/pendopo-biru/assets/flower-corner.png" alt=""></div>
+  <div class="door left"><img class="pendopo" src="/tema/pendopo-biru/assets/pendopo.jpg" alt=""><img class="fc" src="/tema/pendopo-biru/assets/flower-corner.jpg" alt=""></div>
+  <div class="door right"><img class="pendopo" src="/tema/pendopo-biru/assets/pendopo.jpg" alt=""><img class="fc" src="/tema/pendopo-biru/assets/flower-corner.jpg" alt=""></div>
   <div id="coverCard">
     <div class="cov-in">
-      <img class="pendopo-sm" src="/tema/pendopo-biru/assets/pendopo.png" alt="">
+      <img class="pendopo-sm" src="/tema/pendopo-biru/assets/pendopo.jpg" alt="">
       <p class="kick">The Wedding Of</p>
       <h1 class="cov-names" id="covNames"></h1>
       <p class="cov-date" id="covDate"></p>
@@ -146,12 +146,12 @@ footer .fn{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blu
 
 <main id="main" style="visibility:hidden">
   <section id="heroSec">
-    <img class="gun-sm rv" src="/tema/pendopo-biru/assets/gunungan.png" alt="">
+    <img class="gun-sm rv" src="/tema/pendopo-biru/assets/gunungan.jpg" alt="">
     <p class="kick rv">The Wedding Of</p>
     <div class="hero-photo rv" id="heroPhoto"></div>
     <h1 class="hero-names rv" id="heroNames"></h1>
     <p class="hero-date rv" id="heroDate"></p>
-    <img class="swag rv" src="/tema/pendopo-biru/assets/flower-swag.png" alt="">
+    <img class="swag rv" src="/tema/pendopo-biru/assets/flower-swag.jpg" alt="">
   </section>
 
   <section id="coupleSec">
@@ -166,7 +166,7 @@ footer .fn{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blu
       <p id="verseTxt"></p>
       <div class="src" id="verseSrc"></div>
     </div>
-    <img class="swag rv" src="/tema/pendopo-biru/assets/flower-swag.png" alt="" style="transform:scaleY(-1)">
+    <img class="swag rv" src="/tema/pendopo-biru/assets/flower-swag.jpg" alt="" style="transform:scaleY(-1)">
   </section>
 
   <section id="cdSec">
@@ -212,7 +212,7 @@ footer .fn{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blu
 </main>
 
 <footer id="foot" style="visibility:hidden">
-  <img class="gun" src="/tema/pendopo-biru/assets/gunungan.png" alt="">
+  <img class="gun" src="/tema/pendopo-biru/assets/gunungan.jpg" alt="">
   <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami beserta keluarga<br>apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.<br><br>Hormat kami yang berbahagia,</p>
   <p class="fn" id="footNames"></p>
   <p style="margin-top:14px;font-size:11px;letter-spacing:2px">PENDOPO BIRU · UNDANGEN.MY.ID</p>
@@ -332,12 +332,12 @@ function photoOr(ph,label){
   var hp=$("heroPhoto");
   if(BIRU.FOTO.pasangan){
     hp.innerHTML='<img class="ph" src="'+esc(BIRU.FOTO.pasangan)+'" alt="">'+
-      '<img class="fc tl" src="/tema/pendopo-biru/assets/flower-corner.png" alt="">'+
-      '<img class="fc br" src="/tema/pendopo-biru/assets/flower-corner.png" alt="">';
+      '<img class="fc tl" src="/tema/pendopo-biru/assets/flower-corner.jpg" alt="">'+
+      '<img class="fc br" src="/tema/pendopo-biru/assets/flower-corner.jpg" alt="">';
   }else{
     hp.innerHTML='<div class="ph" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:#7d9cc0;font-size:13px"><span style="font-size:44px">🏯</span>Foto pasangan</div>'+
-      '<img class="fc tl" src="/tema/pendopo-biru/assets/flower-corner.png" alt="">'+
-      '<img class="fc br" src="/tema/pendopo-biru/assets/flower-corner.png" alt="">';
+      '<img class="fc tl" src="/tema/pendopo-biru/assets/flower-corner.jpg" alt="">'+
+      '<img class="fc br" src="/tema/pendopo-biru/assets/flower-corner.jpg" alt="">';
   }
   $("heroNames").innerHTML=esc(BIRU.NAMA_PRIA)+'<br><span class="hero-amp">&</span> '+esc(BIRU.NAMA_WANITA);
   $("heroDate").textContent=BIRU.TGL_TAMPIL;
@@ -360,7 +360,7 @@ function photoOr(ph,label){
   }
   // acara
   function ev(t,jam,tmp,maps){
-    return '<div class="evcard rv"><img class="pd" src="/tema/pendopo-biru/assets/pendopo.png" alt=""><h3>'+esc(t)+'</h3><p class="jam">'+esc(jam)+'</p><p class="tmp">'+esc(BIRU.TGL_TAMPIL)+'<br>'+esc(tmp)+'</p>'+(maps?'<a class="maps" target="_blank" rel="noopener" href="'+esc(maps)+'">📍 Buka Google Maps</a>':"")+'</div>';
+    return '<div class="evcard rv"><img class="pd" src="/tema/pendopo-biru/assets/pendopo.jpg" alt=""><h3>'+esc(t)+'</h3><p class="jam">'+esc(jam)+'</p><p class="tmp">'+esc(BIRU.TGL_TAMPIL)+'<br>'+esc(tmp)+'</p>'+(maps?'<a class="maps" target="_blank" rel="noopener" href="'+esc(maps)+'">📍 Buka Google Maps</a>':"")+'</div>';
   }
   $("evWrap").innerHTML=ev(BIRU.AKAD_T,BIRU.AKAD_JAM,BIRU.AKAD_TEMPAT,BIRU.AKAD_MAPS)+ev(BIRU.RESEPSI_T,BIRU.RESEPSI_JAM,BIRU.RESEPSI_TEMPAT,BIRU.RESEPSI_MAPS);
   // gift

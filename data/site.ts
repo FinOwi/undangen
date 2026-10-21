@@ -83,6 +83,14 @@ export const THEMES: Theme[] = [
     badge: "Baru",
   },
   {
+    slug: "rumah-gadang",
+    name: "Rumah Gadang",
+    tagline: "Elegan Minang: gerbang gonjong, songket pucuak rabuang",
+    art: "from-red-950 via-stone-950 to-amber-900",
+    artText: "text-amber-100",
+    badge: "Baru",
+  },
+  {
     slug: "sinematik-nusantara",
     name: "Sinematik Nusantara",
     tagline: "Demo sinematik: sehari di Tanah Karo, 4 bab ambient",

@@ -129,7 +129,7 @@ footer .fn{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--blu
 #sceneZoom{position:fixed;inset:0;z-index:55;background:#f7ecd9;opacity:0;pointer-events:none;overflow:hidden;transition:opacity .8s ease}
 #sceneZoom.show{opacity:1;pointer-events:auto}
 #sceneZoom.bye{opacity:0}
-.scene-in{position:absolute;inset:0;background-image:radial-gradient(ellipse at 50% 40%,rgba(253,248,238,.88) 0%,rgba(253,248,238,.28) 55%,rgba(253,248,238,0) 80%),url("/tema/malam-berbintang/assets/toile.jpg");background-size:auto,400px}
+.scene-in{position:absolute;inset:0;background-image:radial-gradient(ellipse at 50% 40%,rgba(253,248,238,.88) 0%,rgba(253,248,238,.28) 55%,rgba(253,248,238,0) 80%),url("/tema/malam-berbintang/assets/landscape.jpg");background-size:auto,cover}
 #sceneZoom.show .scene-in{animation:zoomOut 2.9s cubic-bezier(.25,.7,.25,1) both}
 @keyframes zoomOut{from{transform:scale(1.32)}to{transform:scale(1)}}
 .scene-band{position:absolute;top:0;left:0;right:0;height:28px;z-index:4;opacity:.9;background-repeat:repeat-x;background-size:34px 26px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='36' viewBox='0 0 48 36'%3E%3Crect width='48' height='5' fill='%23c9a227'/%3E%3Cpath d='M6 5 L42 5 L24 33 Z' fill='%23c9a227'/%3E%3C/svg%3E")}

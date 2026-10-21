@@ -115,6 +115,14 @@ export const THEMES: Theme[] = [
     badge: "Art",
   },
   {
+    slug: "malam-berbintang",
+    name: "Malam Berbintang",
+    tagline: "Malam elegan interaktif: bintang jatuh & rasi hati di bawah langit emas",
+    art: "from-indigo-950 via-slate-900 to-amber-200",
+    artText: "text-amber-100",
+    badge: "Baru",
+  },
+  {
     slug: "sinematik-nusantara",
     name: "Sinematik Nusantara",
     tagline: "Demo sinematik: sehari di Tanah Karo, 4 bab ambient",

@@ -91,6 +91,14 @@ export const THEMES: Theme[] = [
     badge: "Baru",
   },
   {
+    slug: "candi-bentar",
+    name: "Candi Bentar",
+    tagline: "Bali: gerbang terbelah, kain poleng & bunga jepun",
+    art: "from-amber-100 via-orange-200 to-stone-800",
+    artText: "text-amber-950",
+    badge: "Baru",
+  },
+  {
     slug: "pendopo-biru-art",
     name: "Pendopo Biru Art",
     tagline: "Jawa sinematik: lukisan Merapi, toile biru & pendopo emas",
